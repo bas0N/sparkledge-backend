@@ -1,0 +1,2 @@
+20220310	11:15:41	aeccdc0a-23bd-4a45-b46c-c4438ce5e832	Error CORS ERROR
+20220310	11:38:51	ff3f05fb-7de8-458b-85a5-7be2be8c6f55	Error Cannot set headers after they are sent to the client
