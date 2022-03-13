@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const corsOptions = require("./config/corsOptions");
 const app = express();
 const path = require("path");
 const fs = require("fs");
@@ -14,18 +15,7 @@ const PORT = process.env.PORT || 4000;
 
 //custom middleware
 app.use(logger);
-//cors
-const whitelist = ["https://sparkledge.pl", "https://localhost:3500"];
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error("CORS ERROR"));
-    }
-  },
-  optionsSuccessStatus: 200,
-};
+
 app.use(cors(corsOptions));
 
 //url encoded data middleware
@@ -35,7 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use("/", require("./routes/root"));
 app.use("/test", require("./routes/test"));
-//app.use("/users", require("./routes/api/users"));
+app.use("/users", require("./routes/api/users"));
 
 app.all("*", (req, res) => {
   res.status(400);
