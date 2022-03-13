@@ -12,7 +12,7 @@ const getAllUsers = (req, res) => {
   res.json(data.users);
 };
 
-const creteNewUser = (req, res) => {
+const createNewUser = (req, res) => {
   const newUser = {
     id: v4.v4(),
     firstname: req.body.firstname,

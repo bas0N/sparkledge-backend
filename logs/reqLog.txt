@@ -10,3 +10,13 @@
 20220310	11:38:07	66093524-265f-4577-bc33-19dd26f77377	GET	undefined	/test
 20220310	11:38:45	f8cdb1e3-d351-42ae-a9d3-42200dc9fa8b	GET	undefined	/test
 20220310	11:38:51	523ee056-50a2-43de-a99a-bd599cf2fc28	GET	undefined	/testdf
+20220313	22:30:35	f0fa863d-3b2a-4e17-b8ae-22fa876ee1e5	POST	undefined	/register
+20220313	22:31:10	7f17ce2d-4d5e-4e2e-86b7-077e412850ab	POST	undefined	/register
+20220313	22:31:29	956d1938-abb6-4e92-a641-fc6ee7be9339	POST	undefined	/register
+20220313	22:38:44	b2a5f97a-794a-4500-bb71-bfdc9a004959	POST	undefined	/register
+20220313	22:40:03	1633f238-01a1-439f-bce0-17e2fe8a52fc	POST	undefined	/register
+20220313	22:57:37	e59cb9d6-da7d-4bf6-bcc1-22226fae41ce	GET	undefined	/auth
+20220313	22:57:44	bfcf7721-47f4-4c76-bb57-548d871f8841	GET	undefined	/auth
+20220313	22:57:55	e6cc3c66-3aab-430d-a56f-2c07eab0d841	GET	undefined	/auth
+20220313	22:58:04	f95ed3d2-e7f2-4ba8-94e3-599c794dfbfd	GET	undefined	/auth
+20220313	22:59:22	5a41a5e7-045f-4159-ab84-4c3cc1df4234	POST	undefined	/auth
