@@ -1,8 +1,9 @@
+const allowedOrigins = require("./allowedOrigins");
+
 //cors
-const whitelist = ["https://sparkledge.pl", "https://localhost:3500"];
 const corsOptions = {
   origin: (origin, callback) => {
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
       callback(null, true);
     } else {
       callback(new Error("CORS ERROR"));

@@ -10,6 +10,7 @@ const { logger } = require("./middleware/logEvents");
 const errorHandler = require("./middleware/errorHandler");
 const veriftJWT = require("./middleware/verifyJWT");
 const cookieParser = require("cookie-parser");
+const credentials = require("./middleware/credentials");
 
 console.log("ello");
 
@@ -17,6 +18,7 @@ const PORT = process.env.PORT || 4000;
 
 //custom middleware
 app.use(logger);
+app.use(credentials);
 
 app.use(cors(corsOptions));
 
@@ -33,6 +35,7 @@ app.use("/", require("./routes/root"));
 app.use("/register", require("./routes/api/register"));
 app.use("/auth", require("./routes/api/auth"));
 app.use("/refresh", require("./routes/api/auth"));
+app.use("/logout", require("./routes/api/logout"));
 
 //app.use("/test", require("./routes/test"));
 app.use(veriftJWT);
