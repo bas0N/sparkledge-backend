@@ -13,18 +13,25 @@ const path = require("path");
 
 const handleLogin = async (req, res) => {
   const { email, password } = req.body;
+  console.log(req.body);
 
   if (!email || !password) {
     return res.status(400).json({ message: "Email & password required." });
   }
 
   const foundUser = usersDB.users.find((person) => person.email == email);
+  console.log(foundUser);
   if (!foundUser) return res.sendStatus(401); //Unauthorised
   const comparison = bcrypt.compare(password, foundUser.password);
   if (comparison) {
+    const roles = Object.values(foundUser.roles);
+
     const accessToken = jwt.sign(
       {
-        email: foundUser.email,
+        UserInfo: {
+          email: foundUser.email,
+          roles: roles,
+        },
       },
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "45s" }

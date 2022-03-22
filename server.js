@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 //cookie middleware
-app.use(cookieParser);
+app.use(cookieParser());
 //
 app.use("/", require("./routes/root"));
 app.use("/register", require("./routes/api/register"));

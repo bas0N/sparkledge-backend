@@ -25,8 +25,9 @@ const handleTokenRefresh = (req, res) => {
     if (err || foundUser.email !== decoded.email) {
       return res.sendStatus(403);
     }
+    const roles = Object.values(foundUser.roles);
     const accessToken = jwt.sign(
-      { email: decoded.email },
+      { UserInfo: { email: decoded.email, roles: roles } },
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "30s" }
     );

@@ -4,14 +4,14 @@ const usersDB = {
     this.users = data;
   },
 };
-
 const fsPromises = require("fs").promises;
 const path = require("path");
 const bcrypt = require("bcrypt");
 const { v1: uuidv1, v4: uuidv4 } = require("uuid");
+
 const handleNewUser = async (req, res) => {
   const { email, firstname, lastname, password } = req.body;
-
+  console.log(req.body);
   if (!email || !password) {
     return res.status(400).json({ message: "Email & password required." });
   }
@@ -26,6 +26,7 @@ const handleNewUser = async (req, res) => {
     const newUser = {
       id: uuidv4(),
       email: email,
+      roles: { User: 2001 },
       firstname: firstname,
       lastname: lastname,
       password: hashedPassword,
