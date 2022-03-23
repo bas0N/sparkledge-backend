@@ -1,25 +1,17 @@
-const usersDB = {
-  users: require("../model/users.json"),
-  setUsers: function (data) {
-    this.users = data;
-  },
-};
+const User = require("../model/User");
+
 const bcrypt = require("bcrypt");
 const { response } = require("express");
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
-const fspromises = require("fs").promises;
-const path = require("path");
 
 const handleLogin = async (req, res) => {
   const { email, password } = req.body;
-  console.log(req.body);
 
   if (!email || !password) {
     return res.status(400).json({ message: "Email & password required." });
   }
 
-  const foundUser = usersDB.users.find((person) => person.email == email);
+  const foundUser = await User.findOne({ email: email }).exec();
   console.log(foundUser);
   if (!foundUser) return res.sendStatus(401); //Unauthorised
   const comparison = bcrypt.compare(password, foundUser.password);
@@ -44,17 +36,14 @@ const handleLogin = async (req, res) => {
       { expiresIn: "1d" }
     );
     //take care of it
-    otherUsers = usersDB.users.filter(
-      (person) => person.email != foundUser.email
-    );
-    currentUser = { ...foundUser, refreshToken };
-    usersDB.setUsers([...otherUsers, currentUser]);
+    foundUser.refreshToken = refreshToken;
+    const result = await foundUser.save();
     //write the user to the file
-    console.log(currentUser);
+    console.log(result);
     res.cookie("jwt", refreshToken, {
       httpOnly: true,
       sameSite: "None",
-      secure: true,
+      ///  secure: true,
       maxAge: 24 * 60 * 60 * 1000,
     }); //one day valid cookie
     res.json({ accessToken });

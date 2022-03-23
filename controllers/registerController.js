@@ -1,21 +1,16 @@
-const usersDB = {
-  users: require("../model/users.json"),
-  setUsers: function (data) {
-    this.users = data;
-  },
-};
+const User = require("../model/User");
 const fsPromises = require("fs").promises;
 const path = require("path");
 const bcrypt = require("bcrypt");
 const { v1: uuidv1, v4: uuidv4 } = require("uuid");
 
 const handleNewUser = async (req, res) => {
-  const { email, firstname, lastname, password } = req.body;
-  console.log(req.body);
+  const { email, firstName, lastName, password } = req.body;
+  //console.log(req.body);
   if (!email || !password) {
     return res.status(400).json({ message: "Email & password required." });
   }
-  const duplicate = usersDB.users.find((person) => person.email === email);
+  const duplicate = await User.findOne({ email: email }).exec();
   if (duplicate) {
     return res.sendStatus(409);
   }
@@ -23,16 +18,15 @@ const handleNewUser = async (req, res) => {
     //password encryption
     const hashedPassword = await bcrypt.hash(password, 10);
     //storing the user
-    const newUser = {
+    const result = await User.create({
       id: uuidv4(),
       email: email,
-      roles: { User: 2001 },
-      firstname: firstname,
-      lastname: lastname,
+      firstName: firstName,
+      lastName: lastName,
       password: hashedPassword,
-    };
-    usersDB.setUsers([...usersDB.users, newUser]);
-    console.log(usersDB.users);
+    });
+    console.log(result);
+
     res.status(201).json({ success: `New user added:${email}` });
   } catch (err) {
     res.status(500).json({ message: err.message });
