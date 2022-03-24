@@ -8,3 +8,5 @@
 20220324	00:07:16	68f5ff74-b5eb-4cb5-90f6-9a07b5d2ce0c	Error Cannot set headers after they are sent to the client
 20220324	00:08:20	a86f0571-1b31-44ae-86cb-55204bda1c2a	Error Cannot set headers after they are sent to the client
 20220324	01:19:44	6640b541-60a7-47e3-a8ae-1b609ff53932	Error Cannot set headers after they are sent to the client
+20220324	03:07:40	72d87a9a-c18a-47e1-b9ac-9829870e5b61	SyntaxError Unexpected token } in JSON at position 113
+20220324	09:45:56	4446c801-47f9-47c9-a3e2-a71b470a9e6f	ReferenceError Cannot access 'rolesArray' before initialization
