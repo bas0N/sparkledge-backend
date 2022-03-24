@@ -54,7 +54,7 @@ const deleteModerator = async (req, res) => {
       .json({ message: `No moderator matches ID ${req.body.id}.` });
   }
   const result = await moderator.deleteOne({ _id: req.body.id });
-  res.json(result);
+  res.json({ message: `Moderator ${req.body.id} deleted succesfully` });
 };
 
 const getModerator = async (req, res) => {

@@ -7,10 +7,7 @@ const verifyRoles = require("../../middleware/verifyRoles");
 router
   .route("/")
   .get(moderatorsController.getAllModerators)
-  .post(
-    verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor),
-    moderatorsController.createNewModerator
-  )
+  .post(verifyRoles(ROLES_LIST.Admin), moderatorsController.createNewModerator)
   .put(
     verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor),
     moderatorsController.updateModerator

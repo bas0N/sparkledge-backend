@@ -1,18 +1,18 @@
 const User = require("../model/User");
-const fsPromises = require("fs").promises;
-const path = require("path");
 const bcrypt = require("bcrypt");
 const { v1: uuidv1, v4: uuidv4 } = require("uuid");
 
 const handleNewUser = async (req, res) => {
   const { email, firstName, lastName, password } = req.body;
   //console.log(req.body);
-  if (!email || !password) {
-    return res.status(400).json({ message: "Email & password required." });
+  if (!email || !password || !firstName || !lastName) {
+    return res
+      .status(400)
+      .json({ message: "Email, password and personal data are required." });
   }
   const duplicate = await User.findOne({ email: email }).exec();
   if (duplicate) {
-    return res.sendStatus(409);
+    return res.status(409).json({ message: "User already exists." });
   }
   try {
     //password encryption

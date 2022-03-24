@@ -11,7 +11,12 @@ const verifyRoles = (...allowedRoles) => {
       .find((val) => val === true);
 
     if (!result) {
-      return res.sendStatus(401); //unauthorized
+      return res
+        .status(401)
+        .json({
+          message:
+            "Access denied. This account has no right to perform such operation.",
+        }); //unauthorized
     }
     next();
   };

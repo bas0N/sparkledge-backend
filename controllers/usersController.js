@@ -1,6 +1,8 @@
 const { v4 } = require("uuid");
 const User = require("../model/User");
 //data.users = require("../model/users.json");
+const bcrypt = require("bcrypt");
+const { v1: uuidv1, v4: uuidv4 } = require("uuid");
 
 const getAllUsers = async (req, res) => {
   const users = await User.find();
@@ -12,29 +14,37 @@ const getAllUsers = async (req, res) => {
 
 const createNewUser = async (req, res) => {
   if (
-    !newUser?.body?.email ||
-    !newUser?.body?.firstname ||
-    !newUser?.body?.lastname
+    !req?.body?.email ||
+    !req?.body?.firstName ||
+    !req?.body?.lastName ||
+    !req?.body?.password
   ) {
     return res
       .status(400)
-      .json({ message: "Email, first and last names are required" });
+      .json({ message: "Email, password and personal data are required." });
   }
-  //
+  const duplicate = await User.findOne({ email: req.body.email }).exec();
+  if (duplicate) {
+    return res.status(409).json({ message: "User already exists." });
+  }
   try {
+    //password encryption
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    //storing the user
     const result = await User.create({
+      id: uuidv4(),
       email: req.body.email,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
+      password: hashedPassword,
+      roles: req.body.role,
     });
-    res.status(201).json(result);
-  } catch (err) {
-    console.log(err);
-  }
-};
+    console.log(result);
 
-const addNewUser = (req, res) => {
-  res.json({ name: req.body.firstname, password: req.body.password });
+    res.status(201).json({ success: `New user added: ${req.body.email}` });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 };
 
 const updateUser = async (req, res) => {
@@ -82,7 +92,6 @@ const getUser = async (req, res) => {
 
 module.exports = {
   getAllUsers,
-  addNewUser,
   updateUser,
   deleteUser,
   getUser,
