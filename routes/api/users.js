@@ -10,6 +10,6 @@ router
   .post(verifyRoles(ROLES_LIST.Admin), userController.createNewUser)
   .put(verifyRoles(ROLES_LIST.Admin), userController.updateUser)
   .delete(verifyRoles(ROLES_LIST.Admin), userController.deleteUser);
-router.route("/:id").get(userController.getUser);
+router.route("/:id").get(verifyRoles(ROLES_LIST.Admin), userController.getUser);
 
 module.exports = router;

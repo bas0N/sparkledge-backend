@@ -10,7 +10,7 @@ const handleLogin = async (req, res) => {
   }
 
   const foundUser = await User.findOne({ email: email }).exec();
-  if (!foundUser) return res.sendStatus(401); //Unauthorised
+  if (!foundUser) return res.status(401).json({ message: "User not found" }); //Unauthorised
 
   const comparison = await bcrypt.compare(password, foundUser.password);
   if (comparison) {
@@ -46,7 +46,7 @@ const handleLogin = async (req, res) => {
       secure: true,
       maxAge: 24 * 60 * 60 * 1000,
     }); //one day valid cookie
-    res.json({ accessToken });
+    res.status(200).json({ accessToken });
   } else {
     res.status(401).json({ message: "Invalid email or password." }); //Unautorised
   }

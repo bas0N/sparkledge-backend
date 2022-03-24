@@ -9,7 +9,7 @@ const getAllUsers = async (req, res) => {
   if (!users) {
     return res.status(204).json({ message: "No users found." });
   }
-  res.json(users);
+  res.status(200).json(users);
 };
 
 const createNewUser = async (req, res) => {
@@ -60,12 +60,12 @@ const updateUser = async (req, res) => {
   if (req.body?.firstname) user.firstname = req.body.firstname;
   if (req.body?.lastname) user.lastname = req.body.lastname;
   const result = await user.save();
-  res.json(result);
+  res.status(200).json(result);
 };
 
 const deleteUser = async (req, res) => {
   if (!req?.body?.id) {
-    return res.status(400).json({ message: "Employee ID required." });
+    return res.status(400).json({ message: "User ID required." });
   }
   const user = await User.findOne({ _id: req.body.id }).exec();
   if (!user) {
@@ -74,12 +74,12 @@ const deleteUser = async (req, res) => {
       .json({ message: `No user matches Id of: ${req.body.id}` });
   }
   const result = await user.deleteOne({ _id: req.body.id });
-  res.json(data.users);
+  res.status(200).json({ message: "User deleted succesfully" });
 };
 
 const getUser = async (req, res) => {
   if (!req?.params?.id) {
-    return res.status(400).json({ message: "Employee ID required." });
+    return res.status(400).json({ message: "User ID required." });
   }
   const user = await User.findOne({ _id: req.params.id }).exec();
   if (!user) {
