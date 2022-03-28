@@ -237,3 +237,15 @@
 20220324	10:09:45	1ef19c79-9a5e-42b9-9539-42d68ce85559	GET	undefined	/users
 20220324	10:09:53	9a52941d-793e-4945-968a-cb33576a7cf5	POST	undefined	/auth/
 20220324	10:10:01	ed644d55-09de-4afd-bb25-40d9a9f24bcc	GET	undefined	/users
+20220329	00:04:31	0817836f-1555-4b70-8560-665bc7771ee3	POST	undefined	/files
+20220329	00:05:28	87ec69ea-9fe2-4e4a-b078-fad68bf8f124	POST	undefined	/files
+20220329	00:08:26	75dd8405-9920-4709-8fe2-40def2fc5acc	POST	undefined	/files
+20220329	01:13:44	121493c9-7788-446a-9fe8-288788c0f982	POST	undefined	/files
+20220329	01:40:03	9a0d0800-3224-4fa3-8a55-ba917fd161c8	POST	undefined	/files
+20220329	01:44:09	50de892b-706e-488f-9816-f1d8088abb12	POST	undefined	/files
+20220329	01:46:01	e82832af-0ccc-45b7-ab2f-1357f1a0f942	POST	undefined	/files
+20220329	01:46:12	2cfdeac6-aaa1-44f7-97e6-5da583e3be91	POST	undefined	/files
+20220329	01:46:56	6ea25b82-c666-40be-9273-c996e5d9e9f6	POST	undefined	/documents
+20220329	01:47:07	d827db51-fc3b-4c22-8037-ac7bda3e88a5	POST	undefined	/files/documents
+20220329	01:47:16	129820f9-665f-4185-9bdf-13031b220e6a	POST	undefined	/files/documents
+20220329	01:48:08	7385a8b4-7a0f-4ae7-8154-3ab74c83b638	GET	undefined	/files/documents/2503d98a8d1ef11a9daf846445ace2cd
