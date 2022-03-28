@@ -39,6 +39,7 @@ app.use("/register", require("./routes/api/register"));
 app.use("/auth", require("./routes/api/auth"));
 app.use("/refresh", require("./routes/api/refresh"));
 app.use("/logout", require("./routes/api/logout"));
+app.use("/files", require("./routes/api/files"));
 
 //app.use("/test", require("./routes/test"));
 app.use(veriftJWT);
