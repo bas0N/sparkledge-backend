@@ -10,6 +10,8 @@
 * * /`GET`
 * /users
 *  * /`GET` | `POST` | `DELETE` | `PUT`
+* /files
+* * /`GET` | `POST`
 
 ## Register
 
@@ -403,6 +405,47 @@ Retreives a signle user fromm the DB on the basis of ID.
 
   * **Code:** 400 UNAUTHORIZED <br />
     **Content:** `{ message: "No user matches Id of: ${req.params.id}" }`
+
+* **Sample Call:**
+
+
+## Files
+
+### Allows to post and get files to/from server.
+
+  Deletes the access token from the given user.
+
+* **URL**
+
+  /files/documents
+
+* **Method:**
+
+  `GET`
+  
+* **Role required:**
+
+  `User`
+  
+*  **URL Params**
+
+ None
+   
+* **Data Params**
+
+  None
+
+* **Success Response:**
+
+  * **Code:** 200 Successful request and response. <br />
+    **Content:** `{ message: "Logged out succesfully."  }`
+    
+  * **Code:** 204 No content. <br />
+    **Content:** `{ message: "File not found."  }`
+    
+  
+ 
+* **Error Response:**
 
 * **Sample Call:**
 
