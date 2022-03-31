@@ -3,10 +3,18 @@ const router = express.Router();
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 const filesController = require("../../controllers/filesController");
+const ROLES_LIST = require("../../config/roles_list");
+const verifyRoles = require("../../middleware/verifyRoles");
 
 router
   .route("/documents")
-  .post(upload.single("document"), filesController.handleUpload);
+  .post(
+    verifyRoles(ROLES_LIST.User),
+    upload.single("document"),
+    filesController.handleUpload
+  );
 
-router.route("/documents/:key").get(filesController.handleGetFile);
+router
+  .route("/documents/:key")
+  .get(verifyRoles(ROLES_LIST.User), filesController.handleGetFile);
 module.exports = router;
