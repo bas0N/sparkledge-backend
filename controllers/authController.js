@@ -15,11 +15,13 @@ const handleLogin = async (req, res) => {
   const comparison = await bcrypt.compare(password, foundUser.password);
   if (comparison) {
     const roles = Object.values(foundUser.roles);
+    console.log(`the user is:${foundUser}`);
     console.log(`auth controller + ${roles}`);
     const accessToken = jwt.sign(
       {
         UserInfo: {
           email: foundUser.email,
+          id: foundUser._id,
           roles: roles,
         },
       },

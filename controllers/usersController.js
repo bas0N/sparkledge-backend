@@ -5,6 +5,7 @@ const bcrypt = require("bcrypt");
 const { v1: uuidv1, v4: uuidv4 } = require("uuid");
 
 const getAllUsers = async (req, res) => {
+  console.log(`the id is: ${req.id}`);
   const users = await User.find();
   if (!users) {
     return res.status(204).json({ message: "No users found." });

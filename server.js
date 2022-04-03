@@ -9,7 +9,7 @@ const fsPromises = require("fs").promises;
 const { urlencoded } = require("express");
 const { logger } = require("./middleware/logEvents");
 const errorHandler = require("./middleware/errorHandler");
-const veriftJWT = require("./middleware/verifyJWT");
+const verifyJWT = require("./middleware/verifyJWT");
 const cookieParser = require("cookie-parser");
 const credentials = require("./middleware/credentials");
 const mongoose = require("mongoose");
@@ -39,12 +39,13 @@ app.use("/register", require("./routes/api/register"));
 app.use("/auth", require("./routes/api/auth"));
 app.use("/refresh", require("./routes/api/refresh"));
 app.use("/logout", require("./routes/api/logout"));
-app.use("/files", require("./routes/api/files"));
 
 //app.use("/test", require("./routes/test"));
-app.use(veriftJWT);
+app.use(verifyJWT);
 app.use("/moderators", require("./routes/api/moderators"));
 app.use("/users", require("./routes/api/users"));
+app.use("/files", require("./routes/api/files"));
+app.use("/filesDev", require("./routes/api/filesDev"));
 
 app.all("*", (req, res) => {
   res.status(400);
