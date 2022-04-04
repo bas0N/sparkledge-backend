@@ -3,7 +3,9 @@ const Schema = mongoose.Schema;
 
 const documentSchema = new Schema({
   createdBy: { type: String, required: true },
+  createdDate: { type: Date, default: Date.now() },
   creatorEmail: { type: String, required: true },
+  uniDetails: { type: Schema.Types.ObjectId, ref: "UniDetails" }, //add required = true
   fileKey: { type: String, required: true },
   description: { type: String, default: "No description" },
   viewsNum: { type: Number, default: 0 },

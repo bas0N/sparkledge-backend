@@ -4,6 +4,7 @@ const fs = require("fs");
 const util = require("util");
 const unlinkFile = util.promisify(fs.unlink);
 const Document = require("../model/Document");
+const UniDetails = require("../model/UniDetails");
 
 const handleUpload = async (req, res) => {
   //check if the file was attached
@@ -20,9 +21,12 @@ const handleUpload = async (req, res) => {
     await unlinkFile(file.path);
     console.log(results3);
     //res.status(200).json({ imagePath: `/documents/${results3.Key}` });
+    //setting uni details
+    const uniDetails = new UniDetails({});
     const result = await Document.create({
       createdBy: req.id,
       creatorEmail: req.email,
+      uniDetails: uniDetails,
       fileKey: results3.Key,
       description: description,
     });
