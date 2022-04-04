@@ -22,11 +22,16 @@ const handleUpload = async (req, res) => {
     console.log(results3);
     //res.status(200).json({ imagePath: `/documents/${results3.Key}` });
     //setting uni details
-    const uniDetails = new UniDetails({});
     const result = await Document.create({
       createdBy: req.id,
       creatorEmail: req.email,
       uniDetails: uniDetails,
+      properties: {
+        university: req.body.university,
+        faculty: req.body.faculty,
+        programme: req.body.programme,
+        course: req.body.course,
+      },
       fileKey: results3.Key,
       description: description,
     });
@@ -37,6 +42,13 @@ const handleUpload = async (req, res) => {
     res.status(500).json({ message: `Database error: ${err.message}` });
   }
 };
+//get files depending on categories given in the request body (first 20)
+
+//add like/dislike
+
+//
+
+//retrieving data from s3
 const handleGetFile = (req, res) => {
   const key = req.params.key;
   const readStream = getFileStream(key);
