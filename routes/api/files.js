@@ -11,8 +11,13 @@ router
   .post(
     verifyRoles(ROLES_LIST.Admin),
     upload.single("document"),
-    filesController.handleUpload
-  );
+    filesController.handleUploadDocument
+  )
+  .get(verifyRoles(ROLES_LIST.Admin), filesController.handleGetDocuments);
+
+router
+  .route("/likes")
+  .post(verifyRoles(ROLES_LIST.Admin), filesController.addLike);
 
 router
   .route("/documents/:key")

@@ -88,7 +88,7 @@ const getUser = async (req, res) => {
       .status(400)
       .json({ message: `No user matches Id of: ${req.params.id}` });
   }
-  res.json(user);
+  res.status(200).json(user);
 };
 
 module.exports = {
