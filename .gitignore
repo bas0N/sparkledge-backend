@@ -3,3 +3,4 @@ node_modules
 roles_list
 allowedOrigins
 uploads
+reqLog.txt

@@ -5,7 +5,6 @@ const fs = require("fs");
 const util = require("util");
 const unlinkFile = util.promisify(fs.unlink);
 const Document = require("../model/Document");
-const UniDetails = require("../model/UniDetails");
 
 const handleUploadDocument = async (req, res) => {
   //check if the file was attached
@@ -14,14 +13,9 @@ const handleUploadDocument = async (req, res) => {
   }
   try {
     const file = req.file;
-    const description = req.body.description;
-    console.log(file);
-    console.log(description);
-    const results3 = await uploadFile(file);
+    const resultS3 = await uploadFile(file);
     //deleting the file from the server once uploaded to s3
     await unlinkFile(file.path);
-    console.log(results3);
-    //res.status(200).json({ imagePath: `/documents/${results3.Key}` });
     //setting uni details
     const result = await Document.create({
       title: req.body.title,
@@ -34,18 +28,15 @@ const handleUploadDocument = async (req, res) => {
         programme: req.body.programme,
         course: req.body.course,
       },
-      fileKey: results3.Key,
-      description: description,
+      fileKey: resultS3.Key,
+      description: req.body.description,
     });
-    console.log(result);
-
     res.status(201).json({ success: `New document added.` });
   } catch (err) {
     res.status(500).json({ message: `Database error: ${err.message}` });
   }
 };
 //get files depending on categories given in the request body (first 20)
-
 const handleGetDocuments = async (req, res) => {
   try {
     const documents = await Document.find({
@@ -70,51 +61,52 @@ const handleGetDocuments = async (req, res) => {
   }
 };
 
-//add like/dislike
+//add like to the element of the given id
 const addLike = async (req, res) => {
   try {
     userId = req.id;
     documentId = req.body.documentId;
-    console.log(documentId);
+    //finding if the document exists
     document = await Document.find({
       _id: new ObjectId(documentId),
     });
     if (!document) {
       res.status(404).json({ message: `Document not found: ${err.message}` });
     }
-    if (!document.likes.includes(userId)) {
-      Document.updateOne(
-        { _id: ObjectID(documentId) },
+    //finding if the document has already been liked by the user
+    if (!document[0].likes.includes(userId)) {
+      //adding user to a list of users who liked the document
+      await Document.updateOne(
+        { _id: ObjectId(documentId) },
         { $push: { likes: req.id } }
       );
+    } else {
+      res.status(200).json({ message: `Document already liked.` });
+      return;
     }
-    console.log(req.id);
-    console.log(document);
-    res.status(200).json(document);
+    res.status(200).json({ message: "Document liked successfully" });
   } catch (err) {
     res.status(500).json({ message: `Internal error: ${err.message}` });
   }
-
-  //console.log(liked);
-  /*
-  liked = Document.find({ likes: userId });
-  if (liked) {
-    res.status(200).json({ message: "Document already liked" });
-  } else {
-    Document.findAndUpdate(
-      { _id: req.body.documentId }, //id of the document in the parameter
-      { $push: { likes: req.id } }, //id of the user
-      done
-    );
-  }
-  */
 };
+//retrieving a document from the DB
+const handleGetDocument = async (req, res) => {};
 
 //retrieving data from s3
-const handleGetFile = (req, res) => {
-  const key = req.params.key;
-  const readStream = getFileStream(key);
-  readStream.pipe(res);
+const handleGetFile = async (req, res) => {
+  try {
+    //getting the data from s3
+    const key = req.params.key;
+    const readStream = getFileStream(key);
+    readStream.pipe(res);
+    //incrementing the viewcount
+    await Document.updateOne(
+      { fileKey: req.params.key },
+      { $inc: { viewsNum: 1 } }
+    );
+  } catch (err) {
+    res.status(500).json({ message: `Internal error: ${err.message}` });
+  }
 };
 
 module.exports = {
@@ -122,4 +114,5 @@ module.exports = {
   handleGetFile,
   handleGetDocuments,
   addLike,
+  handleGetDocument,
 };
