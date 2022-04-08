@@ -47,12 +47,14 @@ const handleGetDocuments = async (req, res) => {
         course: req.body.course, //add course model with details
       },
     }).exec();
+
     //no documents found
     if (!documents.length) {
       return res.status(400).json({
         message: `No document matches for the values searched.`,
       });
     }
+
     res.status(200).json(documents);
   } catch (err) {
     res
@@ -80,17 +82,36 @@ const addLike = async (req, res) => {
         { _id: ObjectId(documentId) },
         { $push: { likes: req.id } }
       );
+      await Document.updateOne(
+        { _id: ObjectId(documentId) },
+        { $inc: { likesNum: 1 } }
+      );
+      res.status(200).json({ message: "Document liked successfully" });
     } else {
-      res.status(200).json({ message: `Document already liked.` });
-      return;
+      //removing like
+      await Document.updateOne(
+        { _id: ObjectId(documentId) },
+        { $pull: { likes: req.id } }
+      );
+      await Document.updateOne(
+        { _id: ObjectId(documentId) },
+        { $inc: { likesNum: -1 } }
+      );
+      res.status(200).json({ message: "Document disliked successfully" });
     }
-    res.status(200).json({ message: "Document liked successfully" });
   } catch (err) {
     res.status(500).json({ message: `Internal error: ${err.message}` });
   }
 };
 //retrieving a document from the DB
-const handleGetDocument = async (req, res) => {};
+const handleGetDocument = async (req, res) => {
+  try {
+    documentId = req.body.documentId;
+    document = await Document.find({
+      _id: new ObjectId(documentId),
+    });
+  } catch (err) {}
+};
 
 //retrieving data from s3
 const handleGetFile = async (req, res) => {

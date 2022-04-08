@@ -18,6 +18,7 @@ const documentSchema = new Schema({
   },
   //likes array
   likes: [{ type: String, default: 0 }],
+  likesNum: { type: Number, default: 0 },
 });
 
 module.exports = mongoose.model("Document", documentSchema);
