@@ -409,11 +409,12 @@ Retreives a signle user fromm the DB on the basis of ID.
 * **Sample Call:**
 
 
-## Files
+## Documents
 
-### Allows to post and get files to/from server.
+### Get documents.
 
-  Deletes the access token from the given user.
+
+  Allows to retrieve documents that fulfill the approporiate criteria.
 
 * **URL**
 
@@ -432,21 +433,79 @@ Retreives a signle user fromm the DB on the basis of ID.
  None
    
 * **Data Params**
+* Provide the details of documents you want to find
 
-  None
+  `university:[string]`
+  `faculty:[string]`
+  `programme:[string]`
+  `course:[string]`
 
 * **Success Response:**
 
   * **Code:** 200 Successful request and response. <br />
-    **Content:** `{ message: "Logged out succesfully."  }`
-    
-  * **Code:** 204 No content. <br />
-    **Content:** `{ message: "File not found."  }`
-    
-  
+    **Content:** `{documents}`
  
 * **Error Response:**
 
+  * **Code:** 400 No content. <br />
+    **Content:** `{ message: "No document matches for the values searched."  }`
+      
+    OR
+    
+  * **Code:** 500 Server error. <br />
+    **Content:** `{ message: "Document retrieval error: ${err.message}"  }`
+
 * **Sample Call:**
+
+### Post document.
+
+
+  Allows to post a document to the database.
+
+* **URL**
+
+  /files/documents
+
+* **Method:**
+
+  `POST`
+  
+* **Role required:**
+
+  `User`
+  
+*  **URL Params**
+
+ None
+   
+* **Data Params**
+* Provide the details of documents you want to post to the database.
+
+  `title:[string]`
+  `description:[string]`
+  `university:[string]`
+  `faculty:[string]`
+  `programme:[string]`
+  `course:[string]`
+  `document:[file]`
+
+* **Success Response:**
+
+  * **Code:** 201 Created. <br />
+    **Content:** `success: `New document added.`
+ 
+* **Error Response:**
+
+
+  * **Code:** 400 No content. <br />
+    **Content:** `{ message: "No file attached."  }`
+    
+    OR
+    
+  * **Code:** 500 Server error. <br />
+    **Content:** `{ message: `Database error: ${err.message}`  }`
+    
+* **Sample Call:**
+
 
 
