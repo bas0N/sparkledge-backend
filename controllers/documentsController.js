@@ -6,6 +6,30 @@ const util = require("util");
 const unlinkFile = util.promisify(fs.unlink);
 const Document = require("../model/Document");
 
+const handleGetDocumentsDev = async (req, res) => {
+  try {
+    console.log(req.body.description);
+    const documents = await Document.find({
+      description: {
+        $regex: new RegExp(req.body.description),
+        $options: "i",
+      },
+    }).exec();
+
+    //no documents found
+    if (!documents.length) {
+      return res.status(400).json({
+        message: `No document matches for the values searched.`,
+      });
+    }
+
+    res.status(200).json({ description: documents });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: `Document retrieval error: ${err.message}` });
+  }
+};
 const handleUploadDocument = async (req, res) => {
   //check if the file was attached
   if (!req.file) {
@@ -40,6 +64,10 @@ const handleUploadDocument = async (req, res) => {
 const handleGetDocuments = async (req, res) => {
   try {
     const documents = await Document.find({
+      title: {
+        $regex: new RegExp(req.body.title),
+        $options: "i",
+      },
       properties: {
         university: req.body.university,
         faculty: req.body.faculty,
@@ -136,4 +164,5 @@ module.exports = {
   handleGetDocuments,
   addLike,
   handleGetDocument,
+  handleGetDocumentsDev,
 };

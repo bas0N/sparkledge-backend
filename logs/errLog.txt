@@ -20,3 +20,4 @@
 20220406	23:35:23	e0cf067c-ee80-4432-b2d9-207334b4cca2	ReferenceError ObjectId is not defined
 20220406	23:35:39	f2dfb5f6-c944-430c-a406-f5f2bc5d61d8	ObjectParameterError Parameter "obj" to Document() must be an object, got 624dfae355b3898c84034693
 20220406	23:40:24	e727ee37-8911-4b9b-89e2-020b6c35e157	ReferenceError ObjectID is not defined
+20220413	23:35:34	fffd806c-a285-42cc-aa2d-0d03530baaab	Error Cannot set headers after they are sent to the client

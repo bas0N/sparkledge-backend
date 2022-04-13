@@ -16,6 +16,10 @@ router
   .get(verifyRoles(ROLES_LIST.User), documentsController.handleGetDocuments);
 
 router
+  .route("/dev")
+  .get(verifyRoles(ROLES_LIST.User), documentsController.handleGetDocumentsDev);
+
+router
   .route("/:key")
   .get(verifyRoles(ROLES_LIST.User), documentsController.handleGetFile);
 
