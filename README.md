@@ -1,199 +1,194 @@
 # sparkledge-backend api
 
-* /register
-* * /  `POST` 
-* /auth
-* *  /`POST` 
-* /refresh
-* * /`GET`
-* /logout
-* * /`GET`
-* /users
-*  * /`GET` | `POST` | `DELETE` | `PUT`
-* /files
-* * /`GET` | `POST`
+- /register
+- - / `POST`
+- /auth
+- - /`POST`
+- /refresh
+- - /`GET`
+- /logout
+- - /`GET`
+- /users
+- - /`GET` | `POST` | `DELETE` | `PUT`
+- /documents
+- - /`GET` | `POST`
 
 ## Register
 
 ### Register a user
 
-  Creates a user in the database and returns a confirmation. Available for anyone without permission.
+Creates a user in the database and returns a confirmation. Available for anyone without permission.
 
-* **URL**
+- **URL**
 
   /register/
 
-* **Method:**
+- **Method:**
 
   `POST`
-  
-* **Role required:**
+
+- **Role required:**
 
   `None`
-  
-*  **URL Params**
-   
-* **Data Params**
 
-    **Required:**
- 
-   `email:[string]`
-   `firstName:[string]`
-   `lastName:[string]`
-   `password:[string]`
-   
+- **URL Params**
+- **Data Params**
 
-* **Success Response:**
+  **Required:**
 
-  * **Code:** 201 CREATED <br />
+  `email:[string]`
+  `firstName:[string]`
+  `lastName:[string]`
+  `password:[string]`
+
+- **Success Response:**
+
+  - **Code:** 201 CREATED <br />
     **Content:** `{ success: `New user added:${email}` }`
- 
-* **Error Response:**
 
-  * **Code:** 400 BAD REQUEST <br />
+- **Error Response:**
+
+  - **Code:** 400 BAD REQUEST <br />
     **Content:** `{ message: "Email, password and personal data are required." }`
 
   OR
 
-  * **Code:** 409 Conflict <br />
+  - **Code:** 409 Conflict <br />
     **Content:** `{ message: "User already exists." }`
 
-* **Sample Call:**
+- **Sample Call:**
 
 ## Authorization & Authentication
 
 ### Log in the user
 
-  Identifies a user and checks if the login credentials provided are correct
+Identifies a user and checks if the login credentials provided are correct
 
-* **URL**
+- **URL**
 
   /auth/
 
-* **Method:**
+- **Method:**
 
   `POST`
-* **Role required:**
+
+- **Role required:**
 
   `None`
-  
-*  **URL Params**
 
-   **Required:**
- 
-   `email:[string]`
-   `password:[string]`
-   
-   **Optional:**
-   
-* **Data Params**
+- **URL Params**
+
+  **Required:**
+
+  `email:[string]`
+  `password:[string]`
+
+  **Optional:**
+
+- **Data Params**
 
   None
 
-* **Success Response:**
+- **Success Response:**
 
-  * **Code:** 200 Successful request and response. <br />
+  - **Code:** 200 Successful request and response. <br />
     **Content:** `{ accessToken }` }`
- 
-* **Error Response:**
 
-  * **Code:** 400 BAD REQUEST <br />
+- **Error Response:**
+
+  - **Code:** 400 BAD REQUEST <br />
     **Content:** `{ message: "Email & password required." }`
 
   OR
 
-  * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** `{ message: "User not found"  }`
+  - **Code:** 401 UNAUTHORIZED <br />
+    **Content:** `{ message: "User not found" }`
 
-* **Sample Call:**
-
+- **Sample Call:**
 
 ## Refresh
 
 ### Refreshes access token.
 
-  Refreshes the access token for a new period of time.
+Refreshes the access token for a new period of time.
 
-* **URL**
+- **URL**
 
   /refresh/
 
-* **Method:**
+- **Method:**
 
   `GET`
-* **Role required:**
+
+- **Role required:**
 
   `User`
-  
-*  **URL Params**
 
-   **Required:**
- 
-   **Optional:**
-   
-* **Data Params**
+- **URL Params**
+
+  **Required:**
+
+  **Optional:**
+
+- **Data Params**
 
   None
 
-* **Success Response:**
+- **Success Response:**
 
-  * **Code:** 201 CREATED <br />
+  - **Code:** 201 CREATED <br />
     **Content:** `{ success: `New user added:${email}` }`
- 
-* **Error Response:**
 
-  * **Code:** 400 BAD REQUEST <br />
+- **Error Response:**
+
+  - **Code:** 400 BAD REQUEST <br />
     **Content:** `{ message: "Email & password required." }`
 
   OR
 
-  * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** `{ message: "User not found"  }`
+  - **Code:** 401 UNAUTHORIZED <br />
+    **Content:** `{ message: "User not found" }`
 
-* **Sample Call:**
+- **Sample Call:**
 
 ## Logout
 
 ### Logout the user.
 
-  Deletes the access token from the given user.
+Deletes the access token from the given user.
 
-* **URL**
+- **URL**
 
   /logout/
 
-* **Method:**
+- **Method:**
 
   `GET`
-  
-* **Role required:**
+
+- **Role required:**
 
   `User`
-  
-*  **URL Params**
 
- None
-   
-* **Data Params**
+- **URL Params**
+
+None
+
+- **Data Params**
 
   None
 
-* **Success Response:**
+- **Success Response:**
 
-  * **Code:** 200 Successful request and response. <br />
-    **Content:** `{ message: "Logged out succesfully."  }`
-    
-  * **Code:** 204 No content. <br />
-    **Content:** `{ message: "Cookies not found."  }`
-    
-  * **Code:** 204 No content. <br />
-    **Content:** `{ message: "User not found."  }`
- 
-* **Error Response:**
+  - **Code:** 200 Successful request and response. <br />
+    **Content:** `{ message: "Logged out succesfully." }`
+  - **Code:** 204 No content. <br />
+    **Content:** `{ message: "Cookies not found." }`
+  - **Code:** 204 No content. <br />
+    **Content:** `{ message: "User not found." }`
 
-* **Sample Call:**
+- **Error Response:**
 
-
+- **Sample Call:**
 
 ## Users
 
@@ -201,285 +196,266 @@
 
 Retrievess all of the users from DB.
 
-* **URL**
+- **URL**
 
   /user/
 
-* **Method:**
+- **Method:**
 
   `GET`
- 
-* **Role required:**
+
+- **Role required:**
 
   `Admin`
-  
-*  **URL Params**
-*  
-   None
-   
-* **Data Params**
-* 
-   None
-   
-* **Success Response:**
 
-  * **Code:** 204 No content <br />
-    **Content:** `{  message: "No users found."  }`
-    
-  * **Code:** 200  <br />
+- **URL Params**
+- None
+- **Data Params**
+- None
+- **Success Response:**
+
+  - **Code:** 204 No content <br />
+    **Content:** `{ message: "No users found." }`
+  - **Code:** 200 <br />
     **Content:** `{ users }`
- 
-* **Error Response:**
+
+- **Error Response:**
 
 None
 
-* **Sample Call:**
+- **Sample Call:**
 
 ### Create new user.
 
 Creates new user with possibility to give role (permissions such as "Admin" or "Editor").
 
-
-* **URL**
+- **URL**
 
   /user/
 
-* **Method:**
+- **Method:**
 
   `POST`
-  
- * **Role required:**
 
-  `Admin`
-  
-*  **URL Params**
-   
-* **Data Params**
+- **Role required:**
 
-    **Required:**
- 
-   `email:[string]`
-   `firstName:[string]`
-   `lastName:[string]`
-   `password:[string]`
-   
-    **Optional:**
-    
-    `role:{ "Admin":5150,"Editor":1984,"User":2001}`
-   
+`Admin`
 
-* **Success Response:**
+- **URL Params**
+- **Data Params**
 
-  * **Code:** 201 CREATED <br />
+  **Required:**
+
+  `email:[string]`
+  `firstName:[string]`
+  `lastName:[string]`
+  `password:[string]`
+
+  **Optional:**
+
+  `role:{ "Admin":5150,"Editor":1984,"User":2001}`
+
+- **Success Response:**
+
+  - **Code:** 201 CREATED <br />
     **Content:** `{ success: `New user added: ${email}` }`
- 
-* **Error Response:**
 
-  * **Code:** 400 BAD REQUEST <br />
+- **Error Response:**
+
+  - **Code:** 400 BAD REQUEST <br />
     **Content:** `{ message: "Email, password and personal data are required."}`
 
   OR
 
-  * **Code:** 409 Conflict <br />
+  - **Code:** 409 Conflict <br />
     **Content:** `{ message: "User already exists." }`
 
-* **Sample Call:**
+- **Sample Call:**
 
 ### Update User
 
 Updates the user entry with a given id in the DB.
 
-
-* **URL**
+- **URL**
 
   /user/
 
-* **Method:**
+- **Method:**
 
   `PUT`
-  
-* **Role required:**
+
+- **Role required:**
 
   `Admin`
-  
-*  **URL Params**
-   
-* **Data Params**
 
-    **Required:**
- 
-   `id:[string]`
-    `firstName:[string]`
-   `lastName:[string]`
-  
-* **Success Response:**
+- **URL Params**
+- **Data Params**
 
-  * **Code:** 200 <br />
+  **Required:**
+
+  `id:[string]`
+  `firstName:[string]`
+  `lastName:[string]`
+
+- **Success Response:**
+
+  - **Code:** 200 <br />
     **Content:** `{ response` }`
- 
-* **Error Response:**
 
-  * **Code:** 400 BAD REQUEST <br />
+- **Error Response:**
+
+  - **Code:** 400 BAD REQUEST <br />
     **Content:** `{ message: "No user matches Id of: ${req.body.id}"}`
 
-* **Sample Call:**
-
+- **Sample Call:**
 
 ### Delete User
 
 Deletes the user from DB.
 
-* **URL**
+- **URL**
 
   /user/
 
-* **Method:**
+- **Method:**
 
   `DELETE`
 
-* **Role required:**
+- **Role required:**
 
   `Admin`
-  
-*  **URL Params**
-   
-* **Data Params**
 
-    **Required:**
- 
-   `id:[string]`
+- **URL Params**
+- **Data Params**
 
-  
-* **Success Response:**
+  **Required:**
 
-  * **Code:** 200 <br />
-    **Content:** `{ message: "User deleted succesfully"  }`
- 
-* **Error Response:**
+  `id:[string]`
 
- * **Code:** 400 BAD REQUEST <br />
-    **Content:** `{ message: "USER ID required." }`
-    
-  * **Code:** 400 BAD REQUEST <br />
-    **Content:** `{ message: "No user matches Id of: ${req.body.id}"}`
+- **Success Response:**
 
-* **Sample Call:**
+  - **Code:** 200 <br />
+    **Content:** `{ message: "User deleted succesfully" }`
+
+- **Error Response:**
+
+- **Code:** 400 BAD REQUEST <br />
+  **Content:** `{ message: "USER ID required." }`
+- **Code:** 400 BAD REQUEST <br />
+  **Content:** `{ message: "No user matches Id of: ${req.body.id}"}`
+
+- **Sample Call:**
 
 ### Get single user
 
 Retreives a signle user fromm the DB on the basis of ID.
 
-* **URL**
+- **URL**
 
   /users/:id
 
-* **Method:**
+- **Method:**
 
   `GET`
-  
-* **Role required:**
+
+- **Role required:**
 
   `Admin`
-  
-*  **URL Params**
 
-   **Required:**
- 
-   `id=[integer]`
+- **URL Params**
 
-* **Data Params**
+  **Required:**
+
+  `id=[integer]`
+
+- **Data Params**
 
   None
 
-* **Success Response:**
+- **Success Response:**
 
-  * **Code:** 200 <br />
+  - **Code:** 200 <br />
     **Content:** `{ id : 12, name : "Michael Bloom" }`
- 
-* **Error Response:**
 
-  * **Code:** 400 BAD REQUEST <br />
+- **Error Response:**
+
+  - **Code:** 400 BAD REQUEST <br />
     **Content:** `{ message: "User ID required." }`
 
   OR
 
-  * **Code:** 400 UNAUTHORIZED <br />
+  - **Code:** 400 UNAUTHORIZED <br />
     **Content:** `{ message: "No user matches Id of: ${req.params.id}" }`
 
-* **Sample Call:**
-
+- **Sample Call:**
 
 ## Documents
 
 ### Get documents.
 
+Allows to retrieve documents that fulfill the approporiate criteria.
 
-  Allows to retrieve documents that fulfill the approporiate criteria.
-
-* **URL**
+- **URL**
 
   /files/documents
 
-* **Method:**
+- **Method:**
 
   `GET`
-  
-* **Role required:**
+
+- **Role required:**
 
   `User`
-  
-*  **URL Params**
 
- None
-   
-* **Data Params**
-* Provide the details of documents you want to find
+- **URL Params**
+
+None
+
+- **Data Params**
+- Provide the details of documents you want to find
 
   `university:[string]`
   `faculty:[string]`
   `programme:[string]`
   `course:[string]`
 
-* **Success Response:**
+- **Success Response:**
 
-  * **Code:** 200 Successful request and response. <br />
+  - **Code:** 200 Successful request and response. <br />
     **Content:** `{documents}`
- 
-* **Error Response:**
 
-  * **Code:** 400 No content. <br />
-    **Content:** `{ message: "No document matches for the values searched."  }`
-      
+- **Error Response:**
+
+  - **Code:** 400 No content. <br />
+    **Content:** `{ message: "No document matches for the values searched." }`
     OR
-    
-  * **Code:** 500 Server error. <br />
-    **Content:** `{ message: "Document retrieval error: ${err.message}"  }`
+  - **Code:** 500 Server error. <br />
+    **Content:** `{ message: "Document retrieval error: ${err.message}" }`
 
-* **Sample Call:**
+- **Sample Call:**
 
 ### Post document.
 
+Allows to post a document to the database.
 
-  Allows to post a document to the database.
-
-* **URL**
+- **URL**
 
   /files/documents
 
-* **Method:**
+- **Method:**
 
   `POST`
-  
-* **Role required:**
+
+- **Role required:**
 
   `User`
-  
-*  **URL Params**
 
- None
-   
-* **Data Params**
-* Provide the details of documents you want to post to the database.
+- **URL Params**
+
+None
+
+- **Data Params**
+- Provide the details of documents you want to post to the database.
 
   `title:[string]`
   `description:[string]`
@@ -489,23 +465,19 @@ Retreives a signle user fromm the DB on the basis of ID.
   `course:[string]`
   `document:[file]`
 
-* **Success Response:**
+- **Success Response:**
 
-  * **Code:** 201 Created. <br />
+  - **Code:** 201 Created. <br />
     **Content:** `success: `New document added.`
- 
-* **Error Response:**
 
+- **Error Response:**
 
-  * **Code:** 400 No content. <br />
-    **Content:** `{ message: "No file attached."  }`
-    
+  - **Code:** 400 No content. <br />
+    **Content:** `{ message: "No file attached." }`
+
     OR
-    
-  * **Code:** 500 Server error. <br />
-    **Content:** `{ message: `Database error: ${err.message}`  }`
-    
-* **Sample Call:**
 
+  - **Code:** 500 Server error. <br />
+    **Content:** `{ message: `Database error: ${err.message}` }`
 
-
+- **Sample Call:**

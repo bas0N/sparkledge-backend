@@ -44,7 +44,7 @@ app.use("/logout", require("./routes/api/logout"));
 app.use(verifyJWT);
 app.use("/moderators", require("./routes/api/moderators"));
 app.use("/users", require("./routes/api/users"));
-app.use("/files", require("./routes/api/files"));
+app.use("/documents", require("./routes/api/documents"));
 app.use("/filesDev", require("./routes/api/filesDev"));
 
 app.all("*", (req, res) => {
