@@ -397,7 +397,7 @@ Allows to retrieve documents that fulfill the approporiate criteria.
 
 - **URL**
 
-  /files/documents
+  /documents
 
 - **Method:**
 

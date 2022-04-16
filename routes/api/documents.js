@@ -8,12 +8,8 @@ const verifyRoles = require("../../middleware/verifyRoles");
 
 router
   .route("/")
-  .post(
-    verifyRoles(ROLES_LIST.User),
-    upload.single("document"),
-    documentsController.handleUploadDocument
-  )
-  .get(verifyRoles(ROLES_LIST.User), documentsController.handleGetDocuments);
+  .post(upload.single("document"), documentsController.handleUploadDocument)
+  .get(documentsController.handleGetDocuments);
 
 router
   .route("/dev")

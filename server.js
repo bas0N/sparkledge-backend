@@ -42,10 +42,11 @@ app.use("/refresh", require("./routes/api/refresh"));
 app.use("/logout", require("./routes/api/logout"));
 
 //app.use("/test", require("./routes/test"));
+app.use("/documents", require("./routes/api/documents"));
+
 app.use(verifyJWT);
 app.use("/moderators", require("./routes/api/moderators"));
 app.use("/users", require("./routes/api/users"));
-app.use("/documents", require("./routes/api/documents"));
 app.use("/filesDev", require("./routes/api/filesDev"));
 
 app.all("*", (req, res) => {
