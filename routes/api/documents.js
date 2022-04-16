@@ -11,9 +11,7 @@ router
   .post(upload.single("document"), documentsController.handleUploadDocument)
   .get(documentsController.handleGetDocuments);
 
-router
-  .route("/dev")
-  .get(verifyRoles(ROLES_LIST.User), documentsController.handleGetDocumentsDev);
+router.route("/dev").get(documentsController.handleGetDocumentsDev);
 
 router
   .route("/:key")

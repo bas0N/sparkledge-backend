@@ -9,17 +9,12 @@ const Document = require("../model/Document");
 const handleGetDocumentsDev = async (req, res) => {
   try {
     console.log(req.body.description);
-    const documents = await Document.find({
-      description: {
-        $regex: new RegExp(req.body.description),
-        $options: "i",
-      },
-    }).exec();
+    const documents = await Document.find().exec();
 
     //no documents found
     if (!documents.length) {
       return res.status(400).json({
-        message: `No document matches for the values searched.`,
+        message: `No documents found.`,
       });
     }
 
