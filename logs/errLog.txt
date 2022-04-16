@@ -21,3 +21,4 @@
 20220406	23:35:39	f2dfb5f6-c944-430c-a406-f5f2bc5d61d8	ObjectParameterError Parameter "obj" to Document() must be an object, got 624dfae355b3898c84034693
 20220406	23:40:24	e727ee37-8911-4b9b-89e2-020b6c35e157	ReferenceError ObjectID is not defined
 20220413	23:35:34	fffd806c-a285-42cc-aa2d-0d03530baaab	Error Cannot set headers after they are sent to the client
+20220416	17:58:11	12c959b0-7b53-4532-8c1f-8dcc3bf4908b	SyntaxError Unexpected token } in JSON at position 86

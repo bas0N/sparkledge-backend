@@ -532,3 +532,10 @@
 20220414	00:43:52	ef09cd4c-508d-4006-bf3c-fe67222e32a4	GET	undefined	/documents/dev
 20220414	00:44:24	d4477208-7fb5-4077-93cf-004ab30024cd	GET	undefined	/documents/
 20220414	00:44:52	e90d4dce-98f0-493b-98e1-7c820e6766fa	GET	undefined	/documents/
+20220416	17:57:05	9993b242-8135-4a6c-9383-4a07b9400433	GET	undefined	/documents/
+20220416	17:57:39	fdde14a0-d5db-45c7-b7a6-b7da4feb30f5	POST	undefined	/auth/
+20220416	17:57:51	507af2ca-be08-468b-8895-51ff7ec2067f	GET	undefined	/documents/
+20220416	17:58:04	d53b1e3b-d8eb-4e47-bd0f-46fdae783bbf	GET	undefined	/documents/
+20220416	17:58:11	2a5f2e30-5560-4b35-8a3a-bad18d6f1d5f	GET	undefined	/documents/
+20220416	17:58:14	b19e4079-9854-49e9-ab74-20fa030e978b	GET	undefined	/documents/
+20220416	17:58:39	bb79ac33-9870-47a0-b649-4bb365fde649	GET	undefined	/documents/
