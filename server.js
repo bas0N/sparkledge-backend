@@ -19,10 +19,11 @@ const PORT = process.env.PORT || 4000;
 //connect to the DB
 connectDB();
 
-//custom middleware
+//use middleware serving logs
 app.use(logger);
+//use middleware serving credentials
 app.use(credentials);
-
+//use middleware serivng cors check
 app.use(cors(corsOptions));
 
 //url encoded data middleware
@@ -31,21 +32,19 @@ app.use(express.urlencoded({ extended: false }));
 //json middleware
 app.use(express.json());
 
-//cookie middleware
+//cookie parser middleware
 app.use(cookieParser());
 
-//
+//paths that do not require JWT verification
 app.use("/", require("./routes/root"));
 app.use("/register", require("./routes/api/register"));
 app.use("/auth", require("./routes/api/auth"));
 app.use("/refresh", require("./routes/api/refresh"));
 app.use("/logout", require("./routes/api/logout"));
-
-//app.use("/test", require("./routes/test"));
 app.use("/documents", require("./routes/api/documents"));
 
+//paths that do require JWT verification
 app.use(verifyJWT);
-app.use("/moderators", require("./routes/api/moderators"));
 app.use("/users", require("./routes/api/users"));
 app.use("/filesDev", require("./routes/api/filesDev"));
 
