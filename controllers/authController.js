@@ -11,7 +11,10 @@ const handleLogin = async (req, res) => {
 
   const foundUser = await User.findOne({ email: email }).exec();
   if (!foundUser) return res.status(401).json({ message: "User not found" }); //Unauthorised
-
+  //check if the email was verified
+  if (!foundUser.verified) {
+    return res.status(403).json({ message: "Verify your email first." }); //invalid token forbidden access
+  }
   const comparison = await bcrypt.compare(password, foundUser.password);
   if (comparison) {
     const roles = Object.values(foundUser.roles);

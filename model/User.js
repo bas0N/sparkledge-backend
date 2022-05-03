@@ -23,8 +23,13 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  temporaryToken: {
+    type: String,
+    required: true,
+  },
   verified: {
     type: Boolean,
+    required: true,
     default: false,
   },
   refreshToken: String,

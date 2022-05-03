@@ -6,6 +6,6 @@ const TokenVerifyEmail = require("../../model/verifyEmailToken");
 
 router.post("/", registerController.handleNewUser);
 
-router.get("/verify/:email/:token", registerController.verifyEmail);
+router.get("/verify/:token", registerController.verifyEmail);
 
 module.exports = router;

@@ -9,6 +9,12 @@ const tokenVerifyEmailSchema = new Schema({
   token: {
     type: String,
     required: true,
+    default: "0000000000000",
+  },
+  active: {
+    type: Boolean,
+    required: true,
+    default: false,
   },
 });
 
