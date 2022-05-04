@@ -41,11 +41,11 @@ app.use("/register", require("./routes/api/register"));
 app.use("/auth", require("./routes/api/auth"));
 app.use("/refresh", require("./routes/api/refresh"));
 app.use("/logout", require("./routes/api/logout"));
-app.use("/documents", require("./routes/api/documents"));
 app.use("/infrastructure", require("./routes/api/infrastructure"));
 
 //paths that do require JWT verification
 app.use(verifyJWT);
+app.use("/documents", require("./routes/api/documents"));
 app.use("/users", require("./routes/api/users"));
 app.use("/filesDev", require("./routes/api/filesDev"));
 

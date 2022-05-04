@@ -62,7 +62,7 @@ const getCourses = async (req, res) => {
   try {
     const courses = await Course.findOne({
       _id: ObjectId(req.body.courseid),
-    });
+    }).populate("documents");
 
     //no courses found
     if (!courses) {

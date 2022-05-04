@@ -5,6 +5,10 @@ const fs = require("fs");
 const util = require("util");
 const unlinkFile = util.promisify(fs.unlink);
 const Document = require("../model/Document");
+const Course = require("../model/Course");
+const University = require("../model/University");
+const Faculty = require("../model/Faculty");
+const Programme = require("../model/Programme");
 
 const handleGetDocumentsDev = async (req, res) => {
   try {
@@ -25,6 +29,45 @@ const handleGetDocumentsDev = async (req, res) => {
       .json({ message: `Document retrieval error: ${err.message}` });
   }
 };
+const handleGetDocumentsDevTree = async (req, res) => {
+  try {
+    const result = await Course.create({
+      name: "Electronic Principles",
+      semester: 1,
+    });
+
+    //Course.create({name:})
+    const uni = await Programme.updateOne(
+      { name: "Computer Science" },
+      { $push: { courses: result } }
+    );
+
+    /*
+    await University.create({
+      name: "Politechnika Warszawska",
+    });
+    
+    //deleting the file from the server once uploaded to s3
+    //setting uni details
+    const result = await Document.create({
+      title: "test344",
+      createdBy: "test1",
+      creatorEmail: "test1@gmail.com",
+      //uniDetails: uniDetails,
+      description: "description",
+    });
+
+    //Course.create({name:})
+    await Course.updateOne(
+      { name: "calculus" },
+      { $push: { documents: result } }
+    );
+*/
+    res.status(201).json({ success: `New document added.` });
+  } catch (err) {
+    res.status(500).json({ message: `Database error: ${err.message}` });
+  }
+};
 const handleUploadDocument = async (req, res) => {
   //check if the file was attached
   if (!req.file) {
@@ -36,20 +79,18 @@ const handleUploadDocument = async (req, res) => {
     //deleting the file from the server once uploaded to s3
     await unlinkFile(file.path);
     //setting uni details
-    const result = await Document.create({
+    console.log(req.id);
+    const document = await Document.create({
       title: req.body.title,
+      description: req.body.description,
       createdBy: req.id,
       creatorEmail: req.email,
-      //uniDetails: uniDetails,
-      properties: {
-        university: req.body.university,
-        faculty: req.body.faculty,
-        programme: req.body.programme,
-        course: req.body.course,
-      },
       fileKey: resultS3.Key,
-      description: req.body.description,
     });
+    await Course.updateOne(
+      { _id: ObjectId(req.body.courseid) },
+      { $push: { documents: document } }
+    );
     res.status(201).json({ success: `New document added.` });
   } catch (err) {
     res.status(500).json({ message: `Database error: ${err.message}` });
@@ -160,4 +201,5 @@ module.exports = {
   addLike,
   handleGetDocument,
   handleGetDocumentsDev,
+  handleGetDocumentsDevTree,
 };
