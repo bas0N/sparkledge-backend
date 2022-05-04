@@ -12,6 +12,7 @@ router
   .get(documentsController.handleGetDocuments);
 
 router.route("/dev").get(documentsController.handleGetDocumentsDev);
+router.route("/dev/tree").get(documentsController.handleGetDocumentsDevTree);
 
 router
   .route("/:key")
