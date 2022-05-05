@@ -4,3 +4,5 @@ roles_list
 allowedOrigins
 uploads
 reqLog.txt
+errLog.txt
+reqLog.txt
