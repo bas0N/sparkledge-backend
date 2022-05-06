@@ -12,6 +12,9 @@
 - - /`GET` | `POST` | `DELETE` | `PUT`
 - /documents
 - - /`GET` | `POST`
+- /infrastructure
+- - /`GET`
+
 
 ## Register
 
@@ -481,3 +484,179 @@ None
     **Content:** `{ message: `Database error: ${err.message}` }`
 
 - **Sample Call:**
+///////////////////////////
+## Infrastructure
+
+### Get universities
+
+Retrieves a list of universities with nested list of faculties.
+
+- **URL**
+
+  /infrastructure/university
+
+- **Method:**
+
+  `GET`
+
+- **Role required:**
+
+  `None`
+
+- **URL Params**
+-   `None`
+
+- **Data Params**
+
+  `None`
+
+- **Success Response:**
+
+  - **Code:** 200 Succes <br />
+    **Content:** `{ universities }`
+
+- **Error Response:**
+
+  - **Code:** 404 not found  <br />
+    **Content:** `{ message: "No universities found." }`
+    
+    OR
+    
+  - **Code:** 500 Internal server error  <br />
+    **Content:** `{ message: "Universities retrieval error: ${err.message}" }`
+    
+
+
+
+### Get faculties
+
+Retrieves a list of faculties with nested list of programmes once provided a faculty id.
+
+- **URL**
+
+  /infrastructure/faculty
+
+- **Method:**
+
+  `GET`
+
+- **Role required:**
+
+  `None`
+
+- **URL Params**
+- 
+-   `None`
+
+- **Data Params**
+
+-Required:
+Facultyid in this case is a mongodb object retrieved from calling endpoint infrastructure/university.
+
+`facultyid:[string]`
+
+- **Success Response:**
+
+  - **Code:** 200 Succes <br />
+    **Content:** `{ faculties }`
+
+- **Error Response:**
+
+  - **Code:** 404 not found  <br />
+    **Content:** `{ message: "No faculties found." }`
+    
+    OR
+    
+  - **Code:** 500 Internal server error  <br />
+    **Content:** `{ message: "Faculties retrieval error: ${err.message}" }`
+    
+    
+    
+    
+    
+    
+    ### Get programmes
+
+Retrieves a list of programmes with nested list of courses once provided a courses id.
+
+- **URL**
+
+  /infrastructure/programme
+
+- **Method:**
+
+  `GET`
+
+- **Role required:**
+
+  `None`
+
+- **URL Params**
+- 
+-   `None`
+
+- **Data Params**
+
+-Required:
+Programmeid in this case is a mongodb object retrieved from calling endpoint infrastructure/faculty.
+
+`programmeid:[string]`
+
+- **Success Response:**
+
+  - **Code:** 200 Succes <br />
+    **Content:** `{ programmes }`
+
+- **Error Response:**
+
+  - **Code:** 404 not found  <br />
+    **Content:** `{ message: "No programmes found." }`
+    
+    OR
+    
+  - **Code:** 500 Internal server error  <br />
+    **Content:** `{ message: "Programmes retrieval error: ${err.message}" }`
+
+
+ ### Get courses
+
+Retrieves a list of courses with nested list of documents once provided a courses id.
+
+- **URL**
+
+  /infrastructure/course
+
+- **Method:**
+
+  `GET`
+
+- **Role required:**
+
+  `None`
+
+- **URL Params**
+- 
+-   `None`
+
+- **Data Params**
+
+-Required:
+Programmeid in this case is a mongodb object retrieved from calling endpoint infrastructure/programme.
+
+`courseid:[string]`
+
+- **Success Response:**
+
+  - **Code:** 200 Succes <br />
+    **Content:** `{ programmes }`
+
+- **Error Response:**
+
+  - **Code:** 404 not found  <br />
+    **Content:** `{ message: "No courses found." }`
+    
+    OR
+    
+  - **Code:** 500 Internal server error  <br />
+    **Content:** `{ message: "Courses retrieval error: ${err.message}" }`
+
