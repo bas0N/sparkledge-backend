@@ -8,6 +8,12 @@ const Programme = require("../model/Programme");
 const getUniversities = async (req, res) => {
   try {
     const universities = await University.find().populate("faculties");
+    //no faculties found
+    if (!universities) {
+      return res.status(404).json({
+        message: `No universities found.`,
+      });
+    }
     res.status(200).json(universities);
   } catch (err) {
     res
@@ -25,7 +31,7 @@ const getFaculties = async (req, res) => {
 
     //no faculties found
     if (!faculties) {
-      return res.status(400).json({
+      return res.status(404).json({
         message: `No faculties found.`,
       });
     }

@@ -4,6 +4,7 @@ const infrastructureController = require("../../controllers/infrastructureContro
 
 router.get("/university", infrastructureController.getUniversities);
 router.get("/faculty", infrastructureController.getFaculties);
+router.post("/facultypost", infrastructureController.getFaculties);
 router.get("/programme", infrastructureController.getProgrammes);
 router.get("/course", infrastructureController.getCourses);
 

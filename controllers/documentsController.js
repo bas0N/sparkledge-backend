@@ -31,17 +31,22 @@ const handleGetDocumentsDev = async (req, res) => {
 };
 const handleGetDocumentsDevTree = async (req, res) => {
   try {
+    /*
+    const result = await Programme.create({
+      name: "Inżynieria i Analiza danych",
+    });*/
+
     const result = await Course.create({
-      name: "Electronic Principles",
-      semester: 1,
+      name: req.body.name,
+      semester: Number(req.body.semester),
     });
 
     //Course.create({name:})
     const uni = await Programme.updateOne(
-      { name: "Computer Science" },
+      { name: "Inżynieria i Analiza danych" },
       { $push: { courses: result } }
     );
-
+    /*
     /*
     await University.create({
       name: "Politechnika Warszawska",
