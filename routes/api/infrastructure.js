@@ -2,10 +2,9 @@ const express = require("express");
 const router = express.Router();
 const infrastructureController = require("../../controllers/infrastructureController");
 
-router.get("/university", infrastructureController.getUniversities);
-router.get("/faculty", infrastructureController.getFaculties);
-router.post("/facultypost", infrastructureController.getFaculties);
-router.get("/programme", infrastructureController.getProgrammes);
-router.get("/course", infrastructureController.getCourses);
+router.post("/university", infrastructureController.getUniversities);
+router.post("/faculty", infrastructureController.getFaculties);
+router.post("/programme", infrastructureController.getProgrammes);
+router.post("/course", infrastructureController.getCourses);
 
 module.exports = router;
