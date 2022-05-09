@@ -1,10 +1,11 @@
 var ObjectId = require("mongodb").ObjectID;
-const Document = require("../model/Document");
-const Course = require("../model/Course");
-const University = require("../model/University");
-const Faculty = require("../model/Faculty");
-const Programme = require("../model/Programme");
+const Document = require("../../model/Document");
+const Course = require("../../model/Course");
+const University = require("../../model/University");
+const Faculty = require("../../model/Faculty");
+const Programme = require("../../model/Programme");
 
+//retrieving a list of universities with nested faculties from the db
 const getUniversities = async (req, res) => {
   try {
     const universities = await University.find().populate("faculties");
@@ -22,7 +23,8 @@ const getUniversities = async (req, res) => {
   }
 };
 
-const getFaculties = async (req, res) => {
+//retrieving faculty details from the db given the faculty id
+const getFaculty = async (req, res) => {
   try {
     console.log(req.body.facultyid);
     const faculties = await Faculty.findOne({
@@ -43,14 +45,15 @@ const getFaculties = async (req, res) => {
       .json({ message: `Faculties retrieval error: ${err.message}` });
   }
 };
+//retrieving programme details from the db given the programme id
 
-const getProgrammes = async (req, res) => {
+const getProgramme = async (req, res) => {
   try {
     const programmes = await Programme.findOne({
       _id: ObjectId(req.body.programmeid),
     }).populate("courses");
 
-    //no documents found
+    //no programmes found
     if (!programmes) {
       return res.status(400).json({
         message: `No programmes found.`,
@@ -63,8 +66,8 @@ const getProgrammes = async (req, res) => {
       .json({ message: `Faculties retrieval error: ${err.message}` });
   }
 };
-
-const getCourses = async (req, res) => {
+//retrieving a list of courses from the db given the programme id
+const getCourse = async (req, res) => {
   try {
     const courses = await Course.findOne({
       _id: ObjectId(req.body.courseid),
@@ -83,10 +86,29 @@ const getCourses = async (req, res) => {
       .json({ message: `Courses retrieval error: ${err.message}` });
   }
 };
+const getDocuments = async (req, res) => {
+  try {
+    const document = await Document.findOne({
+      _id: ObjectId(req.body.documentid),
+    }).populate("documents");
+
+    //no courses found
+    if (!courses) {
+      return res.status(400).json({
+        message: `No courses found.`,
+      });
+    }
+    res.status(200).json(courses);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: `Courses retrieval error: ${err.message}` });
+  }
+};
 
 module.exports = {
   getUniversities,
-  getFaculties,
-  getProgrammes,
-  getCourses,
+  getFaculty,
+  getProgramme,
+  getCourse,
 };

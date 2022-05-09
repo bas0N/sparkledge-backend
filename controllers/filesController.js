@@ -4,6 +4,7 @@ const fs = require("fs");
 const util = require("util");
 const unlinkFile = util.promisify(fs.unlink);
 
+//uploading file straight to the s3 server
 const handleUpload = async (req, res) => {
   const file = req.file;
   const description = req.body.description;
@@ -15,6 +16,7 @@ const handleUpload = async (req, res) => {
   console.log(result);
   res.status(200).json({ imagePath: `/documents/${result.Key}` });
 };
+//
 const handleGetFile = (req, res) => {
   const key = req.params.key;
   const readStream = getFileStream(key);
