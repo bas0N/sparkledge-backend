@@ -8,7 +8,7 @@ const { v1: uuidv1, v4: uuidv4 } = require("uuid");
 
 const handleNewUser = async (req, res) => {
   const { email, firstName, lastName, password } = req.body;
-  //console.log(req.body);
+
   if (!email || !password || !firstName || !lastName) {
     return res
       .status(400)
@@ -38,11 +38,53 @@ const handleNewUser = async (req, res) => {
 
     console.log(result);
 
-    const message = `${process.env.BASE_URL}register/verify/${token}`;
+    const message = `https://www.sparkledge.pl/signin?verifyemail=${token}`;
     await sendEmail(email, "Verify your email", message);
     console.log("email sent to an account");
     res.status(201).json({
       success: `New user added: ${email}`,
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+//method allows to send a new verification link to an email
+const newVerificationToken = async (req, res) => {
+  if (!req.body.email) {
+    return res.status(400).json({ message: "Email is required." });
+  }
+
+  try {
+    //check if user exists and if it is already verified
+    const user = await User.findOne({
+      email: req.body.email,
+    });
+    //return if it doesn't exist or is already verified
+    if (!user) {
+      return res
+        .status(400)
+        .json({ message: "User with the given email doesn't exist." });
+    } else if (user.verified) {
+      return res
+        .status(400)
+        .json({ message: "User has been already verified." });
+    }
+    //create new jwt token for email verification with default expiration time of 15 min
+    const token = jwt.sign(
+      { userEmail: email },
+      process.env.ACCESS_TOKEN_SECRET
+    );
+
+    //update user't temporary token field
+    user.temporaryToken = token;
+    //save user
+    user.save();
+    //create a message
+    const message = `${process.env.BASE_URL}register/verify/${token}`;
+    await sendEmail(email, "Verify your email", message);
+    console.log("email sent to an account");
+    res.status(201).json({
+      success: `New verification mail successfully sent to: ${email}`,
     });
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -58,7 +100,7 @@ const verifyEmail = async (req, res) => {
 
     if (!user) {
       return res.status(400).json({
-        message: "no_user_found",
+        message: "No user found.",
       }); //token expired
     }
     //verification of temporary jwt token
@@ -75,7 +117,6 @@ const verifyEmail = async (req, res) => {
     );
     //updating the user entry in the database
     (user.temporaryToken = false), (user.verified = true), await user.save();
-
     res.status(200).json({ message: `Mail verified succesfully` });
   } catch (err) {
     console.log(err);

@@ -89,6 +89,8 @@ const addCourse = async (req, res) => {
     return res.status(400).json({ message: "No name included." });
   } else if (!req.body.courseid) {
     return res.status(400).json({ message: "No course id provided." });
+  } else if (!req.body.semester) {
+    return res.status(400).json({ message: "No semester provided." });
   }
   try {
     const course = await Course.create({

@@ -10,70 +10,6 @@ const University = require("../model/University");
 const Faculty = require("../model/Faculty");
 const Programme = require("../model/Programme");
 
-const handleGetDocumentsDev = async (req, res) => {
-  try {
-    console.log(req.body.description);
-    const documents = await Document.find().exec();
-
-    //no documents found
-    if (!documents.length) {
-      return res.status(400).json({
-        message: `No documents found.`,
-      });
-    }
-
-    res.status(200).json({ description: documents });
-  } catch (err) {
-    res
-      .status(500)
-      .json({ message: `Document retrieval error: ${err.message}` });
-  }
-};
-const handleGetDocumentsDevTree = async (req, res) => {
-  try {
-    /*
-    const result = await Programme.create({
-      name: "Inżynieria i Analiza danych",
-    });*/
-
-    const result = await Course.create({
-      name: req.body.name,
-      semester: Number(req.body.semester),
-    });
-
-    //Course.create({name:})
-    const uni = await Programme.updateOne(
-      { name: "Inżynieria i Analiza danych" },
-      { $push: { courses: result } }
-    );
-    /*
-    /*
-    await University.create({
-      name: "Politechnika Warszawska",
-    });
-    
-    //deleting the file from the server once uploaded to s3
-    //setting uni details
-    const result = await Document.create({
-      title: "test344",
-      createdBy: "test1",
-      creatorEmail: "test1@gmail.com",
-      //uniDetails: uniDetails,
-      description: "description",
-    });
-
-    //Course.create({name:})
-    await Course.updateOne(
-      { name: "calculus" },
-      { $push: { documents: result } }
-    );
-*/
-    res.status(201).json({ success: `New document added.` });
-  } catch (err) {
-    res.status(500).json({ message: `Database error: ${err.message}` });
-  }
-};
-
 //upload the document to a given course
 const handleUploadDocument = async (req, res) => {
   //check if the file was attached
@@ -201,6 +137,4 @@ module.exports = {
   handleUploadDocument,
   handleGetFile,
   addLike,
-  handleGetDocumentsDev,
-  handleGetDocumentsDevTree,
 };

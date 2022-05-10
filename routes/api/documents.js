@@ -10,9 +10,6 @@ router
   .route("/")
   .post(upload.single("document"), documentsController.handleUploadDocument);
 
-router.route("/dev").get(documentsController.handleGetDocumentsDev);
-router.route("/dev/tree").get(documentsController.handleGetDocumentsDevTree);
-
 router
   .route("/:key")
   .get(verifyRoles(ROLES_LIST.User), documentsController.handleGetFile);
