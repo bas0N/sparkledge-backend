@@ -6,9 +6,7 @@ const documentsController = require("../../controllers/documentsController");
 const ROLES_LIST = require("../../config/roles_list");
 const verifyRoles = require("../../middleware/verifyRoles");
 
-router
-  .route("/")
-  .post(upload.single("document"), documentsController.handleUploadDocument);
+router.route("/").post(documentsController.handleUploadDocument);
 
 router
   .route("/:key")

@@ -42,6 +42,7 @@ app.use("/auth", require("./routes/api/auth"));
 app.use("/refresh", require("./routes/api/refresh"));
 app.use("/logout", require("./routes/api/logout"));
 app.use("/infrastructure", require("./routes/api/infrastructure"));
+app.use("/forgot-password", require("./routes/api/forgotPassword"));
 
 //paths that do require JWT verification
 app.use(verifyJWT);

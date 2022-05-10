@@ -1,7 +1,5 @@
 const User = require("../model/User");
-const TokenVerifyEmail = require("../model/verifyEmailToken");
 const jwt = require("jsonwebtoken");
-
 const sendEmail = require("../config/email");
 const bcrypt = require("bcrypt");
 const { v1: uuidv1, v4: uuidv4 } = require("uuid");
