@@ -115,7 +115,7 @@ const verifyEmail = async (req, res) => {
     );
     //updating the user entry in the database
     (user.temporaryToken = false), (user.verified = true), await user.save();
-    res.status(200).json({ message: `Mail verified succesfully` });
+    res.status(200).json({ message: `Mail verified succesfully.` });
   } catch (err) {
     console.log(err);
     res.status(400).json({ message: err.message });

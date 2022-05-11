@@ -16,7 +16,10 @@ router.post("/course", infrastructureControllerFETCH.getCourse);
 //enpoints for creating infrastructure elements (login and role needed )
 router
   .route("/university/new")
-  .post(infrastructureControllerCREATE.addUniversity);
+  .post(
+    verifyRoles(ROLES_LIST.Admin),
+    infrastructureControllerCREATE.addUniversity
+  );
 router
   .route("/faculty/new")
   .post(

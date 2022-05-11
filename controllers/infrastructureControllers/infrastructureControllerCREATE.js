@@ -24,7 +24,7 @@ const addUniversity = async (req, res) => {
     const univeristy = await University.create({
       name: req.body.name,
     });
-    res.status(201).json({ success: `New university added.` });
+    res.status(200).json({ success: `New university added.` });
   } catch (err) {
     res.status(500).json({ message: `Database error: ${err.message}` });
   }
@@ -44,7 +44,7 @@ const addFaculty = async (req, res) => {
   });
   if (fac) {
     res.status(409).json({
-      message: `Conflict. University with name ${req.body.name} already exists.`,
+      message: `Conflict. Faculty with name ${req.body.name} already exists.`,
     });
   }
   try {
@@ -68,6 +68,15 @@ const addProgramme = async (req, res) => {
     return res.status(400).json({ message: "No name included." });
   } else if (!req.body.facultyid) {
     return res.status(400).json({ message: "No faculty id provided." });
+  }
+  //check if the programe already exists
+  prog = await Programme.find({
+    name: req.body.name,
+  });
+  if (prog) {
+    res.status(409).json({
+      message: `Conflict. Programme with name ${req.body.name} already exists.`,
+    });
   }
   try {
     const programme = await Programme.create({
