@@ -2,45 +2,67 @@
 
 #### Endpoints that require user to be logged (JWT token provided) ####
   -------------------------------------------------------------
-- /[register](https://github.com/bas0N/sparkledge-backend/edit/main/README.md#register)
-  - [Register a user](https://github.com/bas0N/sparkledge-backend/edit/main/README.md#register-a-user)
+- /[register](https://github.com/bas0N/sparkledge-backend#register)
+  - [Register a user](https://github.com/bas0N/sparkledge-backend#register-a-user)
     - / `POST` path: /register/
-  - [Verify Email](https://github.com/bas0N/sparkledge-backend/edit/main/README.md#verify-email) 
-    - / `GET` path: register/verify/:token
-- /[auth](https://github.com/bas0N/sparkledge-backend/edit/main/README.md#log-in-the-user)
-  - [Log in the user](https://github.com/bas0N/sparkledge-backend/edit/main/README.md#log-in-the-user)
+  - [Verify Email](https://github.com/bas0N/sparkledge-backend#verify-email) 
+    - / `GET` path: /register/verify/:token
+- /[auth](https://github.com/bas0N/sparkledge-backend#log-in-the-user)
+  - [Log in the user](https://github.com/bas0N/sparkledge-backend#log-in-the-user)
     - /`POST` path: /auth/
-- /[refresh](https://github.com/bas0N/sparkledge-backend/edit/main/README.md#refresh)
-  - [Refresh access token](https://github.com/bas0N/sparkledge-backend/edit/main/README.md#refreshes-access-token)
+- /[refresh](https://github.com/bas0N/sparkledge-backend#refresh)
+  - [Refresh access token](https://github.com/bas0N/sparkledge-backend#refreshes-access-token)
     - /`GET` path: /refresh/
-- /[logout](https://github.com/bas0N/sparkledge-backend/edit/main/README.md#logout)
-  - [Logout the user](https://github.com/bas0N/sparkledge-backend/edit/main/README.md#logout-the-user) 
+- /[logout](https://github.com/bas0N/sparkledge-backend#logout)
+  - [Logout the user](https://github.com/bas0N/sparkledge-backend#logout-the-user) 
     - /`GET` path: /logout/
-- /[infrastructure](https://github.com/bas0N/sparkledge-backend/edit/main/README.md#infrastructure)
-  - [Get universities](https://github.com/bas0N/sparkledge-backend/edit/main/README.md#get-universities)
-    - /`POST` path: infrastructure/university/
-  - [Get faculties](https://github.com/bas0N/sparkledge-backend/edit/main/README.md#get-faculties)
-    - /`POST` path: infrastructure/faculty/
-  - [Get programmes](https://github.com/bas0N/sparkledge-backend/edit/main/README.md#get-programmes)
-    - /`POST` path: infrastructure/programme/
-  - [Get courses](https://github.com/bas0N/sparkledge-backend/edit/main/README.md#get-courses)
-    - /`POST` path: infrastructure/course/
-  - [Add university](https://github.com/bas0N/sparkledge-backend/edit/main/README.md#add-university)
-    - /`POST` path: infrastructure/university/new
-  - [Add faculty](https://github.com/bas0N/sparkledge-backend/edit/main/README.md#add-faculty)
-    - /`POST` path: infrastructure/faculty/new
-  - [Add programme](https://github.com/bas0N/sparkledge-backend/edit/main/README.md#add-programme)
-    - /`POST` path: infrastructure/programme/new
-  - [Add course](https://github.com/bas0N/sparkledge-backend/edit/main/README.md#add-course)
-    - /`POST` path: infrastructure/course/new
-- /forgot-password
+- /[infrastructure](https://github.com/bas0N/sparkledge-backend#infrastructure)
+  - [Get universities](https://github.com/bas0N/sparkledge-backend#get-universities)
+    - /`POST` path: /infrastructure/university/
+  - [Get faculties](https://github.com/bas0N/sparkledge-backend#get-faculties)
+    - /`POST` path: /infrastructure/faculty/
+  - [Get programmes](https://github.com/bas0N/sparkledge-backend#get-programmes)
+    - /`POST` path: /infrastructure/programme/
+  - [Get courses](https://github.com/bas0N/sparkledge-backend#get-courses)
+    - /`POST` path: /infrastructure/course/
+  - [Add university](https://github.com/bas0N/sparkledge-backend#add-university)
+    - /`POST` path: /infrastructure/university/new
+  - [Add faculty](https://github.com/bas0N/sparkledge-backend#add-faculty)
+    - /`POST` path: /infrastructure/faculty/new
+  - [Add programme](https://github.com/bas0N/sparkledge-backend#add-programme)
+    - /`POST` path: /infrastructure/programme/new
+  - [Add course](https://github.com/bas0N/sparkledge-backend#add-course)
+    - /`POST` path: /infrastructure/course/new
+- /[forgot-password](https://github.com/bas0N/sparkledge-backend#forgot-password)
+  - [Send change password link to email](https://github.com/bas0N/sparkledge-backend#send-change-password-link-to-email)
+    - /`POST` path: /forgot-password/
+  - [Change password](https://github.com/bas0N/sparkledge-backend#change-password)
+    - /`POST` path: /forgot-password/:userId/:token
+
+
+  -------------------------------------------------------------
+
   #### Do not require user to be logged (JWT token provided) ####
   -------------------------------------------------------------
-- /users
-  - /`GET` | `POST` | `DELETE` | `PUT`
-- /documents
-  - /`GET` | `POST`
-- /files
+- /[users](https://github.com/bas0N/sparkledge-backend#users)
+  - [Get all users](https://github.com/bas0N/sparkledge-backend#get-all-users)
+    - /`GET` path: /user/
+  - [Get single user](https://github.com/bas0N/sparkledge-backend#add-university)
+    - /`GET` path: /user/:id
+  - [Create new user](https://github.com/bas0N/sparkledge-backend#create-new-user)
+    - /`POST` path: /user/
+  - [Delete user](https://github.com/bas0N/sparkledge-backend#delete-user)
+    - /`DELETE` path: /user/
+  - [Update user object](https://github.com/bas0N/sparkledge-backend#update-user)
+    - /`PUT` path: /user/
+- /[documents](https://github.com/bas0N/sparkledge-backend#documents)
+  - [Add a document](https://github.com/bas0N/sparkledge-backend#add-document)
+    - /`POST` path: /document/
+  - [Get a document](https://github.com/bas0N/sparkledge-backend#get-document)
+    - /`GET` path: /document/:key
+  - [Add like](https://github.com/bas0N/sparkledge-backend#add-like)
+    - /`GET` path: /document/likes
+- /files - to be written
   
 
 
@@ -157,7 +179,7 @@ Identifies a user and checks if the login credentials provided are correct
 
   **Optional:**
 
-- **Data Params**
+- **Body Params**
 
   None
 
@@ -200,7 +222,7 @@ Refreshes the access token for a new period of time.
 
   -None
 
-- **Data Params**
+- **Body Params**
 
   -None
 
@@ -243,7 +265,7 @@ Deletes the access token from the given user.
 
 None
 
-- **Data Params**
+- **Body Params**
 
   None
 
@@ -280,7 +302,7 @@ Retrievess all of the users from DB.
 
 - **URL Params**
 - None
-- **Data Params**
+- **Body Params**
 - None
 - **Success Response:**
 
@@ -312,7 +334,7 @@ Creates new user with possibility to give role (permissions such as "Admin" or "
 `Admin`
 
 - **URL Params**
-- **Data Params**
+- **Body Params**
 
   **Required:**
 
@@ -359,7 +381,7 @@ Updates the user entry with a given id in the DB.
   `Admin`
 
 - **URL Params**
-- **Data Params**
+- **Body Params**
 
   **Required:**
 
@@ -396,7 +418,7 @@ Deletes the user from DB.
   `Admin`
 
 - **URL Params**
-- **Data Params**
+- **Body Params**
 
   **Required:**
 
@@ -438,7 +460,7 @@ Retreives a signle user fromm the DB on the basis of ID.
 
   `id=[integer]`
 
-- **Data Params**
+- **Body Params**
 
   None
 
@@ -461,56 +483,14 @@ Retreives a signle user fromm the DB on the basis of ID.
 
 ## Documents
 
-### Get documents.
 
-Allows to retrieve documents that fulfill the approporiate criteria.
-
-- **URL**
-
-  /documents
-
-- **Method:**
-
-  `GET`
-
-- **Role required:**
-
-  `User`
-
-- **URL Params**
-
-None
-
-- **Data Params**
-- Provide the details of documents you want to find
-
-  `university:[string]`
-  `faculty:[string]`
-  `programme:[string]`
-  `course:[string]`
-
-- **Success Response:**
-
-  - **Code:** 200 Successful request and response. <br />
-    **Content:** `{documents}`
-
-- **Error Response:**
-
-  - **Code:** 400 No content. <br />
-    **Content:** `{ message: "No document matches for the values searched." }`
-    OR
-  - **Code:** 500 Server error. <br />
-    **Content:** `{ message: "Document retrieval error: ${err.message}" }`
-
-- **Sample Call:**
-
-### Post document.
+### Add document.
 
 Allows to post a document to the database.
 
 - **URL**
 
-  /files/documents
+  /documents
 
 - **Method:**
 
@@ -524,15 +504,12 @@ Allows to post a document to the database.
 
 None
 
-- **Data Params**
+- **Body Params**
 - Provide the details of documents you want to post to the database.
 
   `title:[string]`
   `description:[string]`
-  `university:[string]`
-  `faculty:[string]`
-  `programme:[string]`
-  `course:[string]`
+  `courseid:[string]`
   `document:[file]`
 
 - **Success Response:**
@@ -551,7 +528,92 @@ None
     **Content:** `{ message: `Database error: ${err.message}` }`
 
 - **Sample Call:**
-///////////////////////////
+
+### Get document.
+
+Allows to retrieve a pdf file from the database and updates the viewcount.
+
+- **URL**
+
+  /documents/:key
+
+- **Method:**
+
+  `GET`
+
+- **Role required:**
+
+  `User`
+
+- **URL Params**
+
+   -  `:key` S3 file key that can be retrieved from course endpoint. 
+
+
+- **Body Params**
+
+  -None
+
+- **Success Response:**
+
+  - **Code:** 20 Success. <br />
+    **Content:** `PDF file`
+
+
+
+- **Sample Call:**
+
+### Add like.
+
+Allows to add like if not liked and remove like if liked
+
+- **URL**
+
+  /documents/likes
+
+- **Method:**
+
+  `POST`
+
+- **Role required:**
+
+  `User`
+
+- **URL Params**
+
+  -None
+
+- **Body Params**
+- Provide the details of documents you want to post to the database.
+
+  `documentId:[string]`
+ 
+
+- **Success Response:**
+
+  - **Code:** 200 Success. <br />
+    **Content:** `message: "Document liked successfully"`
+    
+    OR
+    
+ - **Code:** 200 Success. <br />
+    **Content:** `message: "Document disliked successfully"`
+
+- **Error Response:**
+
+  - **Code:** 400 Bad request. <br />
+    **Content:** `{ message: "No document id provided." }`
+
+    OR
+  - **Code:** 404 No content. <br />
+    **Content:** `{ message: `Document not found: ${err.message}` }`
+
+    OR
+  - **Code:** 500 Server error. <br />
+    **Content:** `{ message: `Database error: ${err.message}` }`
+
+- **Sample Call:**
+
 ## Infrastructure
 
 ### Get universities
@@ -573,7 +635,7 @@ Retrieves a list of universities with nested list of faculties.
 - **URL Params**
 -   `None`
 
-- **Data Params**
+- **Body Params**
 
   `None`
 
@@ -615,7 +677,7 @@ Retrieves a list of faculties with nested list of programmes once provided a fac
 - 
 -   `None`
 
-- **Data Params**
+- **Body Params**
 
 -Required:
 Facultyid in this case is a mongodb object retrieved from calling endpoint infrastructure/university.
@@ -658,7 +720,7 @@ Retrieves a list of programmes with nested list of courses once provided a cours
 - 
 -   `None`
 
-- **Data Params**
+- **Body Params**
 
 -Required:
 Programmeid in this case is a mongodb object retrieved from calling endpoint infrastructure/faculty.
@@ -701,7 +763,7 @@ Retrieves a list of courses with nested list of documents once provided a course
 - 
 -   `None`
 
-- **Data Params**
+- **Body Params**
 
 -Required:
 Programmeid in this case is a mongodb object retrieved from calling endpoint infrastructure/programme.
@@ -930,4 +992,103 @@ Allows to add a new course to the database and nest it to the programme object.
     **Content:** `{ message: "Database error: ${err.message}" }`
 
 
+## Forgot password
 
+### Send change password link to email
+
+Request an email to be sent to a provided email adress with a link.
+Link redirects to a login page andconsists of a change password token that will be put into change password method.
+
+- **URL**
+
+  /forgot-password/
+
+- **Method:**
+
+  `POST`
+
+- **Role required:**
+
+  `User`
+
+- **URL Params**
+ 
+  -None
+
+- **Body Params**
+
+- Required:
+  - Email of the account of which password we want to change.
+ `email:[string]`
+
+- **Success Response:**
+
+  - **Code:** 200 Succes <br />
+    **Content:** `{ success: `Email with password reset instructions succesfully sent to: ${req.body.email}` }`
+
+- **Error Response:**
+
+  - **Code:** 400 bad request  <br />
+    **Content:** `{ message: "No name included." }`
+    
+     OR
+   - **Code:** 400 bad request  <br />
+    **Content:** `{ message: "Email is required." }`
+     OR
+   - **Code:** 404 no content  <br />
+    **Content:** `{ message: "User doesn't exist."  }`
+    
+    OR
+    
+  - **Code:** 500 Internal server error  <br />
+    **Content:** `{ message: "Database error: ${err.message}" }`
+    
+### Change password
+
+Changes the password of the user in the database after providing a change password session token.
+
+- **URL**
+
+  /forgot-password/:userId/:token
+
+- **Method:**
+
+  `POST`
+
+- **Role required:**
+
+  `User`
+
+- **URL Params**
+ 
+   -  `:email` email of the user whose password we want to change.
+   -  `:token` Token that is included in the redirect email sento to an indicated email adress 
+
+
+- **Body Params**
+  - Required:
+     - New password to be set  
+      `password:[string]`
+
+  -none
+- **Success Response:**
+
+  - **Code:** 200 Succes <br />
+    **Content:** `{ message: `Password has been changed succesfully.`` }`
+
+- **Error Response:**
+
+  - **Code:** 400 bad request  <br />
+    **Content:** `{ message: "Email and password are required." }`
+    
+     OR
+   - **Code:** 404 no content  <br />
+    **Content:** `{ message: "User doesn't exist or token is invalid." }`
+     OR
+   - **Code:** 400 bad request  <br />
+    **Content:** `{ message: "Activation link has expired."  }`
+    
+    OR
+    
+  - **Code:** 500 Internal server error  <br />
+    **Content:** `{ message: "Database error: ${err.message}" }`
