@@ -16,6 +16,12 @@ const handleUploadDocument = async (req, res) => {
   if (!req.file) {
     return res.status(400).json({ message: "No file attached." });
   }
+  //check if title and description are included
+  if (!req.body.title || !req.body.description) {
+    return res
+      .status(400)
+      .json({ message: "Title and description must be included." });
+  }
   try {
     const file = req.file;
     const resultS3 = await uploadFile(file);
@@ -31,7 +37,7 @@ const handleUploadDocument = async (req, res) => {
     });
     //pushing document object to the list in course object
     await Course.updateOne(
-      { _id: ObjectId(req.body.courseid) },
+      { _id: ObjectId(req.body.courseId) },
       { $push: { documents: document } }
     );
     res.status(201).json({ success: `New document added.` });
@@ -42,6 +48,9 @@ const handleUploadDocument = async (req, res) => {
 
 //add like to the element of the given id or removing the like if a user already liked it
 const addLike = async (req, res) => {
+  if (!req.body.documentId) {
+    return res.status(400).json({ message: "No document id provided." });
+  }
   try {
     userId = req.id;
     documentId = req.body.documentId;

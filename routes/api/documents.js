@@ -8,12 +8,8 @@ const verifyRoles = require("../../middleware/verifyRoles");
 
 router.route("/").post(documentsController.handleUploadDocument);
 
-router
-  .route("/:key")
-  .get(verifyRoles(ROLES_LIST.User), documentsController.handleGetFile);
+router.route("/:key").get(documentsController.handleGetFile);
 
-router
-  .route("/likes")
-  .post(verifyRoles(ROLES_LIST.Admin), documentsController.addLike);
+router.route("/likes").post(documentsController.addLike);
 
 module.exports = router;

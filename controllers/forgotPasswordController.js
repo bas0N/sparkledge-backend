@@ -26,7 +26,7 @@ const sendChangePassLink = async (req, res) => {
     const message = `https://www.sparkledge.pl/forgot-password?token=${token}`;
     await sendEmail(req.body.email, "Reset your password", message);
     console.log("email sent to an account");
-    res.status(201).json({
+    res.status(200).json({
       success: `Email with password reset instructions succesfully sent to: ${req.body.email}`,
     });
   } catch (err) {
@@ -43,6 +43,7 @@ const handlePassChange = async (req, res) => {
     }
     //check if a user with a given token exists
     const user = await User.findOne({
+      email: req.params.email,
       temporaryToken: req.params.token,
     }).exec();
     if (!user) {

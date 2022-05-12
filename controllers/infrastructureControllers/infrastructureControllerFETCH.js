@@ -26,9 +26,9 @@ const getUniversities = async (req, res) => {
 //retrieving faculty details from the db given the faculty id
 const getFaculty = async (req, res) => {
   try {
-    console.log(req.body.facultyid);
+    console.log(req.body.facultyId);
     const faculties = await Faculty.findOne({
-      _id: ObjectId(req.body.facultyid),
+      _id: ObjectId(req.body.facultyId),
     }).populate("programmes");
 
     //no faculties found
@@ -50,7 +50,7 @@ const getFaculty = async (req, res) => {
 const getProgramme = async (req, res) => {
   try {
     const programmes = await Programme.findOne({
-      _id: ObjectId(req.body.programmeid),
+      _id: ObjectId(req.body.programmeId),
     }).populate("courses");
 
     //no programmes found
@@ -70,7 +70,7 @@ const getProgramme = async (req, res) => {
 const getCourse = async (req, res) => {
   try {
     const courses = await Course.findOne({
-      _id: ObjectId(req.body.courseid),
+      _id: ObjectId(req.body.courseId),
     }).populate("documents");
 
     //no courses found
@@ -89,7 +89,7 @@ const getCourse = async (req, res) => {
 const getDocuments = async (req, res) => {
   try {
     const document = await Document.findOne({
-      _id: ObjectId(req.body.documentid),
+      _id: ObjectId(req.body.documentId),
     }).populate("documents");
 
     //no courses found

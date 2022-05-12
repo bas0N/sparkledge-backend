@@ -52,7 +52,7 @@ const addFaculty = async (req, res) => {
       name: req.body.name,
     });
     await University.updateOne(
-      { _id: ObjectId(req.body.universityid) },
+      { _id: ObjectId(req.body.universityId) },
       { $push: { faculties: faculty } }
     );
     res.status(201).json({ success: `New faculty added.` });
@@ -66,7 +66,7 @@ const addProgramme = async (req, res) => {
   //checks if the name has been included in the body
   if (!req.body.name) {
     return res.status(400).json({ message: "No name included." });
-  } else if (!req.body.facultyid) {
+  } else if (!req.body.facultyId) {
     return res.status(400).json({ message: "No faculty id provided." });
   }
   //check if the programe already exists
@@ -83,7 +83,7 @@ const addProgramme = async (req, res) => {
       name: req.body.name,
     });
     await Faculty.updateOne(
-      { _id: ObjectId(req.body.facultyid) },
+      { _id: ObjectId(req.body.facultyId) },
       { $push: { programmes: programme } }
     );
     res.status(201).json({ success: `New programme added.` });
@@ -96,7 +96,7 @@ const addCourse = async (req, res) => {
   //checks if the name has been included in the body
   if (!req.body.name) {
     return res.status(400).json({ message: "No name included." });
-  } else if (!req.body.courseid) {
+  } else if (!req.body.courseId) {
     return res.status(400).json({ message: "No course id provided." });
   } else if (!req.body.semester) {
     return res.status(400).json({ message: "No semester provided." });
@@ -106,7 +106,7 @@ const addCourse = async (req, res) => {
       name: req.body.name,
     });
     await Faculty.updateOne(
-      { _id: ObjectId(req.body.programmeid) },
+      { _id: ObjectId(req.body.programmeId) },
       { $push: { courses: course } }
     );
     res.status(201).json({ success: `New course added.` });
