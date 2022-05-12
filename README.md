@@ -1,11 +1,13 @@
 # sparkledge-backend api
 
-#### Endpoints that require user to be logged (JWT token provided) ####
-  -------------------------------------------------------------
+#### Endpoints that require user to be logged (JWT token provided)
+
+---
+
 - /[register](https://github.com/bas0N/sparkledge-backend#register)
   - [Register a user](https://github.com/bas0N/sparkledge-backend#register-a-user)
     - / `POST` path: /register/
-  - [Verify Email](https://github.com/bas0N/sparkledge-backend#verify-email) 
+  - [Verify Email](https://github.com/bas0N/sparkledge-backend#verify-email)
     - / `GET` path: /register/verify/:token
 - /[auth](https://github.com/bas0N/sparkledge-backend#log-in-the-user)
   - [Log in the user](https://github.com/bas0N/sparkledge-backend#log-in-the-user)
@@ -14,7 +16,7 @@
   - [Refresh access token](https://github.com/bas0N/sparkledge-backend#refreshes-access-token)
     - /`GET` path: /refresh/
 - /[logout](https://github.com/bas0N/sparkledge-backend#logout)
-  - [Logout the user](https://github.com/bas0N/sparkledge-backend#logout-the-user) 
+  - [Logout the user](https://github.com/bas0N/sparkledge-backend#logout-the-user)
     - /`GET` path: /logout/
 - /[infrastructure](https://github.com/bas0N/sparkledge-backend#infrastructure)
   - [Get universities](https://github.com/bas0N/sparkledge-backend#get-universities)
@@ -34,21 +36,23 @@
   - [Add course](https://github.com/bas0N/sparkledge-backend#add-course)
     - /`POST` path: /infrastructure/course/new
 - /[forgot-password](https://github.com/bas0N/sparkledge-backend#forgot-password)
+
   - [Send change password link to email](https://github.com/bas0N/sparkledge-backend#send-change-password-link-to-email)
     - /`POST` path: /forgot-password/
   - [Change password](https://github.com/bas0N/sparkledge-backend#change-password)
     - /`POST` path: /forgot-password/:userId/:token
 
+  ***
 
-  -------------------------------------------------------------
+  #### Do not require user to be logged (JWT token provided)
 
-  #### Do not require user to be logged (JWT token provided) ####
-  -------------------------------------------------------------
+  ***
+
 - /[users](https://github.com/bas0N/sparkledge-backend#users)
   - [Get all users](https://github.com/bas0N/sparkledge-backend#get-all-users)
     - /`GET` path: /user/
   - [Get single user](https://github.com/bas0N/sparkledge-backend#add-university)
-    - /`GET` path: /user/:id
+    - /`GET` path: /user/:Id
   - [Create new user](https://github.com/bas0N/sparkledge-backend#create-new-user)
     - /`POST` path: /user/
   - [Delete user](https://github.com/bas0N/sparkledge-backend#delete-user)
@@ -63,9 +67,6 @@
   - [Add like](https://github.com/bas0N/sparkledge-backend#add-like)
     - /`GET` path: /document/likes
 - /files - to be written
-  
-
-
 
 ## Register
 
@@ -86,7 +87,7 @@ Creates a user in the database and returns a confirmation. Available for anyone 
   -None
 
 - **URL Params**
-   - None
+  - None
 - **Body Params**
 
   **Required:**
@@ -112,6 +113,7 @@ Creates a user in the database and returns a confirmation. Available for anyone 
     **Content:** `{ message: "User already exists." }`
 
 - **Sample Call:**
+
 ### Verify Email
 
 Allows to change the state of user in the database from not verified to verified
@@ -129,7 +131,8 @@ Allows to change the state of user in the database from not verified to verified
   -None
 
 - **URL Params**
-   -  `:token` JWT token that is assigned to the user after registration and by default sent on email. 
+
+  - `:token` JWT token that is assigned to the user after registration and by default sent on email.
 
 - **Body Params**
 
@@ -483,7 +486,6 @@ Retreives a signle user fromm the DB on the basis of ID.
 
 ## Documents
 
-
 ### Add document.
 
 Allows to post a document to the database.
@@ -509,7 +511,7 @@ None
 
   `title:[string]`
   `description:[string]`
-  `courseid:[string]`
+  `courseId:[string]`
   `document:[file]`
 
 - **Success Response:**
@@ -547,8 +549,7 @@ Allows to retrieve a pdf file from the database and updates the viewcount.
 
 - **URL Params**
 
-   -  `:key` S3 file key that can be retrieved from course endpoint. 
-
+  - `:key` S3 file key that can be retrieved from course endpoint.
 
 - **Body Params**
 
@@ -558,8 +559,6 @@ Allows to retrieve a pdf file from the database and updates the viewcount.
 
   - **Code:** 20 Success. <br />
     **Content:** `PDF file`
-
-
 
 - **Sample Call:**
 
@@ -587,17 +586,16 @@ Allows to add like if not liked and remove like if liked
 - Provide the details of documents you want to post to the database.
 
   `documentId:[string]`
- 
 
 - **Success Response:**
 
   - **Code:** 200 Success. <br />
     **Content:** `message: "Document liked successfully"`
-    
+
     OR
-    
- - **Code:** 200 Success. <br />
-    **Content:** `message: "Document disliked successfully"`
+
+- **Code:** 200 Success. <br />
+  **Content:** `message: "Document disliked successfully"`
 
 - **Error Response:**
 
@@ -605,10 +603,12 @@ Allows to add like if not liked and remove like if liked
     **Content:** `{ message: "No document id provided." }`
 
     OR
+
   - **Code:** 404 No content. <br />
     **Content:** `{ message: `Document not found: ${err.message}` }`
 
     OR
+
   - **Code:** 500 Server error. <br />
     **Content:** `{ message: `Database error: ${err.message}` }`
 
@@ -626,14 +626,14 @@ Retrieves a list of universities with nested list of faculties.
 
 - **Method:**
 
-  `GET`
+  `POST`
 
 - **Role required:**
 
   `None`
 
 - **URL Params**
--   `None`
+- `None`
 
 - **Body Params**
 
@@ -646,16 +646,13 @@ Retrieves a list of universities with nested list of faculties.
 
 - **Error Response:**
 
-  - **Code:** 404 not found  <br />
+  - **Code:** 404 not found <br />
     **Content:** `{ message: "No universities found." }`
-    
+
     OR
-    
-  - **Code:** 500 Internal server error  <br />
+
+  - **Code:** 500 Internal server error <br />
     **Content:** `{ message: "Universities retrieval error: ${err.message}" }`
-    
-
-
 
 ### Get faculties
 
@@ -667,22 +664,22 @@ Retrieves a list of faculties with nested list of programmes once provided a fac
 
 - **Method:**
 
-  `GET`
+  `POST`
 
 - **Role required:**
 
   `None`
 
 - **URL Params**
-- 
--   `None`
+-
+- `None`
 
 - **Body Params**
 
 -Required:
 Facultyid in this case is a mongodb object retrieved from calling endpoint infrastructure/university.
 
-`facultyid:[string]`
+`facultyId:[string]`
 
 - **Success Response:**
 
@@ -691,14 +688,13 @@ Facultyid in this case is a mongodb object retrieved from calling endpoint infra
 
 - **Error Response:**
 
-  - **Code:** 404 not found  <br />
+  - **Code:** 404 not found <br />
     **Content:** `{ message: "No faculties found." }`
-    
+
     OR
-    
-  - **Code:** 500 Internal server error  <br />
+
+  - **Code:** 500 Internal server error <br />
     **Content:** `{ message: "Faculties retrieval error: ${err.message}" }`
-    
 
     ### Get programmes
 
@@ -710,22 +706,22 @@ Retrieves a list of programmes with nested list of courses once provided a cours
 
 - **Method:**
 
-  `GET`
+  `POST`
 
 - **Role required:**
 
   `None`
 
 - **URL Params**
-- 
--   `None`
+-
+- `None`
 
 - **Body Params**
 
 -Required:
 Programmeid in this case is a mongodb object retrieved from calling endpoint infrastructure/faculty.
 
-`programmeid:[string]`
+`programmeId:[string]`
 
 - **Success Response:**
 
@@ -734,16 +730,15 @@ Programmeid in this case is a mongodb object retrieved from calling endpoint inf
 
 - **Error Response:**
 
-  - **Code:** 404 not found  <br />
+  - **Code:** 404 not found <br />
     **Content:** `{ message: "No programmes found." }`
-    
+
     OR
-    
-  - **Code:** 500 Internal server error  <br />
+
+  - **Code:** 500 Internal server error <br />
     **Content:** `{ message: "Programmes retrieval error: ${err.message}" }`
 
-
- ### Get courses
+### Get courses
 
 Retrieves a list of courses with nested list of documents once provided a courses id.
 
@@ -753,22 +748,22 @@ Retrieves a list of courses with nested list of documents once provided a course
 
 - **Method:**
 
-  `GET`
+  `POST`
 
 - **Role required:**
 
   `None`
 
 - **URL Params**
-- 
--   `None`
+-
+- `None`
 
 - **Body Params**
 
 -Required:
 Programmeid in this case is a mongodb object retrieved from calling endpoint infrastructure/programme.
 
-`courseid:[string]`
+`courseId:[string]`
 
 - **Success Response:**
 
@@ -777,17 +772,15 @@ Programmeid in this case is a mongodb object retrieved from calling endpoint inf
 
 - **Error Response:**
 
-  - **Code:** 404 not found  <br />
+  - **Code:** 404 not found <br />
     **Content:** `{ message: "No courses found." }`
-    
+
     OR
-    
-  - **Code:** 500 Internal server error  <br />
+
+  - **Code:** 500 Internal server error <br />
     **Content:** `{ message: "Courses retrieval error: ${err.message}" }`
 
-
-
- ### Add University
+### Add University
 
 Allows to add a new univeristy to the database.
 
@@ -804,37 +797,37 @@ Allows to add a new univeristy to the database.
   `Admin`
 
 - **URL Params**
- 
+
   -None
 
 - **Body Params**
 
 - Required:
+
   - Name of the univeristy to be created
- `name:[string]`
+    `name:[string]`
 
 - **Success Response:**
 
   - **Code:** 200 Succes <br />
-    **Content:** `{  success: `New university added.` }`
+    **Content:** `{ success: `New university added.` }`
 
 - **Error Response:**
 
-  - **Code:** 404 not found  <br />
+  - **Code:** 404 not found <br />
     **Content:** `{ message: "No name included." }`
-    
+
     OR
-   - **Code:** 409 conflict  <br />
+
+  - **Code:** 409 conflict <br />
     **Content:** `{ message: "Conflict. University with name ${req.body.name} already exists." }`
-    
-    OR
-    
-  - **Code:** 500 Internal server error  <br />
+
+  OR
+
+  - **Code:** 500 Internal server error <br />
     **Content:** `{ message: "Database error: ${err.message}" }`
-    
-    
-    
- ### Add Faculty
+
+### Add Faculty
 
 Allows to add a new faculty to the database and nest it to the university object.
 
@@ -851,41 +844,42 @@ Allows to add a new faculty to the database and nest it to the university object
   `Admin`
 
 - **URL Params**
- 
+
   -None
 
 - **Body Params**
 
 - Required:
+
   - Name of the univeristy to be created
- `name:[string]`
+    `name:[string]`
   - Id of the univeristy where the faculty has to be nested
- `universityid:[string]`
+    `universityId:[string]`
 
 - **Success Response:**
 
   - **Code:** 200 Succes <br />
-    **Content:** `{  success: `New faculty added.` }`
+    **Content:** `{ success: `New faculty added.` }`
 
 - **Error Response:**
 
-  - **Code:** 404 not found  <br />
+  - **Code:** 404 not found <br />
     **Content:** `{ message: "No name included." }`
-    
-     OR
-   - **Code:** 409 conflict  <br />
+
+    OR
+
+  - **Code:** 409 conflict <br />
     **Content:** `{ message: "No university id provided." }`
     OR
-   - **Code:** 409 conflict  <br />
+  - **Code:** 409 conflict <br />
     **Content:** `{ message: "Conflict. University with name ${req.body.name} already exists." }`
-    
-    OR
-    
-  - **Code:** 500 Internal server error  <br />
+
+  OR
+
+  - **Code:** 500 Internal server error <br />
     **Content:** `{ message: "Database error: ${err.message}" }`
-    
-      
- ### Add Programme
+
+### Add Programme
 
 Allows to add a new programme to the database and nest it to the faculty object.
 
@@ -902,41 +896,42 @@ Allows to add a new programme to the database and nest it to the faculty object.
   `Admin`
 
 - **URL Params**
- 
+
   -None
 
 - **Body Params**
 
 - Required:
+
   - Name of the programme to be created
- `name:[string]`
+    `name:[string]`
   - Id of the faculty where the faculty has to be nested
- `facultyid:[string]`
+    `facultyId:[string]`
 
 - **Success Response:**
 
   - **Code:** 200 Succes <br />
-    **Content:** `{  success: `New faculty added.` }`
+    **Content:** `{ success: `New faculty added.` }`
 
 - **Error Response:**
 
-  - **Code:** 400 bad request  <br />
+  - **Code:** 400 bad request <br />
     **Content:** `{ message: "No name included." }`
-    
-     OR
-   - **Code:** 400 bad request  <br />
+
+    OR
+
+  - **Code:** 400 bad request <br />
     **Content:** `{ message: "No faculty id provided." }`
     OR
-   - **Code:** 409 conflict  <br />
+  - **Code:** 409 conflict <br />
     **Content:** `{ message: "Conflict. Programme with name ${req.body.name} already exists." }`
-    
-    OR
-    
-  - **Code:** 500 Internal server error  <br />
+
+  OR
+
+  - **Code:** 500 Internal server error <br />
     **Content:** `{ message: "Database error: ${err.message}" }`
 
-     
- ### Add Course
+### Add Course
 
 Allows to add a new course to the database and nest it to the programme object.
 
@@ -953,44 +948,45 @@ Allows to add a new course to the database and nest it to the programme object.
   `Admin`
 
 - **URL Params**
- 
+
   -None
 
 - **Body Params**
 
 - Required:
+
   - Name of the course to be created
- `name:[string]`
+    `name:[string]`
   - Id of the faculty where the faculty has to be nested
- `programmeid:[string]`
+    `programmeId:[string]`
   - Semester when the course takes place
- `semester:[number]`
+    `semester:[number]`
 
 - **Success Response:**
 
   - **Code:** 200 Succes <br />
-    **Content:** `{  success: `New course added.` }`
+    **Content:** `{ success: `New course added.` }`
 
 - **Error Response:**
 
-  - **Code:** 400 bad request  <br />
+  - **Code:** 400 bad request <br />
     **Content:** `{ message: "No name included." }`
-    
-     OR
-   - **Code:** 400 bad request  <br />
-    **Content:** `{ message: "No faculty id provided." }`
-     OR
-   - **Code:** 400 bad request  <br />
-    **Content:** `{ message: "No semester  provided." }`
-    OR
-   - **Code:** 409 conflict  <br />
-    **Content:** `{ message: "Conflict. Programme with name ${req.body.name} already exists." }`
-    
-    OR
-    
-  - **Code:** 500 Internal server error  <br />
-    **Content:** `{ message: "Database error: ${err.message}" }`
 
+    OR
+
+  - **Code:** 400 bad request <br />
+    **Content:** `{ message: "No faculty id provided." }`
+    OR
+  - **Code:** 400 bad request <br />
+    **Content:** `{ message: "No semester provided." }`
+    OR
+  - **Code:** 409 conflict <br />
+    **Content:** `{ message: "Conflict. Programme with name ${req.body.name} already exists." }`
+
+  OR
+
+  - **Code:** 500 Internal server error <br />
+    **Content:** `{ message: "Database error: ${err.message}" }`
 
 ## Forgot password
 
@@ -1012,14 +1008,15 @@ Link redirects to a login page andconsists of a change password token that will 
   `User`
 
 - **URL Params**
- 
+
   -None
 
 - **Body Params**
 
 - Required:
+
   - Email of the account of which password we want to change.
- `email:[string]`
+    `email:[string]`
 
 - **Success Response:**
 
@@ -1028,21 +1025,22 @@ Link redirects to a login page andconsists of a change password token that will 
 
 - **Error Response:**
 
-  - **Code:** 400 bad request  <br />
+  - **Code:** 400 bad request <br />
     **Content:** `{ message: "No name included." }`
-    
-     OR
-   - **Code:** 400 bad request  <br />
-    **Content:** `{ message: "Email is required." }`
-     OR
-   - **Code:** 404 no content  <br />
-    **Content:** `{ message: "User doesn't exist."  }`
-    
+
     OR
-    
-  - **Code:** 500 Internal server error  <br />
+
+  - **Code:** 400 bad request <br />
+    **Content:** `{ message: "Email is required." }`
+    OR
+  - **Code:** 404 no content <br />
+    **Content:** `{ message: "User doesn't exist." }`
+
+  OR
+
+  - **Code:** 500 Internal server error <br />
     **Content:** `{ message: "Database error: ${err.message}" }`
-    
+
 ### Change password
 
 Changes the password of the user in the database after providing a change password session token.
@@ -1060,17 +1058,18 @@ Changes the password of the user in the database after providing a change passwo
   `User`
 
 - **URL Params**
- 
-   -  `:email` email of the user whose password we want to change.
-   -  `:token` Token that is included in the redirect email sento to an indicated email adress 
 
+  - `:email` email of the user whose password we want to change.
+  - `:token` Token that is included in the redirect email sento to an indicated email adress
 
 - **Body Params**
+
   - Required:
-     - New password to be set  
+    - New password to be set  
       `password:[string]`
 
   -none
+
 - **Success Response:**
 
   - **Code:** 200 Succes <br />
@@ -1078,17 +1077,18 @@ Changes the password of the user in the database after providing a change passwo
 
 - **Error Response:**
 
-  - **Code:** 400 bad request  <br />
+  - **Code:** 400 bad request <br />
     **Content:** `{ message: "Email and password are required." }`
-    
-     OR
-   - **Code:** 404 no content  <br />
-    **Content:** `{ message: "User doesn't exist or token is invalid." }`
-     OR
-   - **Code:** 400 bad request  <br />
-    **Content:** `{ message: "Activation link has expired."  }`
-    
+
     OR
-    
-  - **Code:** 500 Internal server error  <br />
+
+  - **Code:** 404 no content <br />
+    **Content:** `{ message: "User doesn't exist or token is invalid." }`
+    OR
+  - **Code:** 400 bad request <br />
+    **Content:** `{ message: "Activation link has expired." }`
+
+  OR
+
+  - **Code:** 500 Internal server error <br />
     **Content:** `{ message: "Database error: ${err.message}" }`
