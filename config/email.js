@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 
-const sendEmail = async (emailRecipient, subject, text) => {
+const sendEmail = async (emailRecipient, subject, text, htmlToSend) => {
   try {
     const transporter = nodemailer.createTransport({
       host: process.env.HOST,
@@ -16,7 +16,8 @@ const sendEmail = async (emailRecipient, subject, text) => {
       from: process.env.ZOHO_EMAIL,
       to: emailRecipient,
       subject: subject,
-      text: text,
+      //text: text,
+      html: htmlToSend,
     });
     console.log("Mail verificaton link has been sent to your mail.");
     /*

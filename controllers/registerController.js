@@ -3,6 +3,25 @@ const jwt = require("jsonwebtoken");
 const sendEmail = require("../config/email");
 const bcrypt = require("bcrypt");
 const { v1: uuidv1, v4: uuidv4 } = require("uuid");
+var handlebars = require("handlebars");
+var fs = require("fs");
+
+const { promisify } = require("util");
+
+const readFile = promisify(fs.readFile);
+
+var readHTMLFile = function (path, callback) {
+  fs.readFile(path, { encoding: "utf-8" }, function (err, html) {
+    if (err) {
+      callback(err);
+      throw err;
+    } else {
+      callback(null, html);
+    }
+  });
+};
+
+const html = await readFile("../email/index.html", "utf8");
 
 const handleNewUser = async (req, res) => {
   const { email, firstName, lastName, password } = req.body;
@@ -37,7 +56,7 @@ const handleNewUser = async (req, res) => {
     console.log(result);
 
     const message = `https://www.sparkledge.pl/signin?verifyemail=${token}`;
-    await sendEmail(email, "Verify your email", message);
+    await sendEmail(email, "Verify your email", message, html);
     console.log("email sent to an account");
     res.status(201).json({
       success: `New user added: ${email}`,
