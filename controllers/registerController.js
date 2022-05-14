@@ -21,8 +21,6 @@ var readHTMLFile = function (path, callback) {
   });
 };
 
-const html = await readFile("../email/index.html", "utf8");
-
 const handleNewUser = async (req, res) => {
   const { email, firstName, lastName, password } = req.body;
 
@@ -53,10 +51,20 @@ const handleNewUser = async (req, res) => {
       temporaryToken: token,
     });
 
-    console.log(result);
-
-    const message = `https://www.sparkledge.pl/signin?verifyemail=${token}`;
-    await sendEmail(email, "Verify your email", message, html);
+    //creating a verification link
+    const verificationLink = `https://www.sparkledge.pl/signin?verifyemail=${token}`;
+    //reading a html file
+    const html = await readFile("email/index.html", "utf8");
+    //changing variables with handlebars
+    var template = handlebars.compile(html);
+    var replacements = {
+      username: firstName,
+      email: email,
+      verificationLink: verificationLink,
+    };
+    var htmlToSend = template(replacements);
+    //sending email with attatched html
+    await sendEmail(email, "Verify your email", htmlToSend);
     console.log("email sent to an account");
     res.status(201).json({
       success: `New user added: ${email}`,
