@@ -54,7 +54,7 @@ const handleNewUser = async (req, res) => {
     //creating a verification link
     const verificationLink = `https://www.sparkledge.pl/signin?verifyemail=${token}`;
     //reading a html file
-    const html = await readFile("email/index.html", "utf8");
+    const html = await readFile("email/verifyEmail.html", "utf8");
     //changing variables with handlebars
     var template = handlebars.compile(html);
     var replacements = {
