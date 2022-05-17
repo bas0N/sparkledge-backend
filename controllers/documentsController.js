@@ -91,7 +91,7 @@ const addLike = async (req, res) => {
   }
 };
 
-//retrieving the document from from s3
+//retrieving the file from from s3
 const handleGetFile = async (req, res) => {
   try {
     //getting the data from s3
@@ -105,6 +105,26 @@ const handleGetFile = async (req, res) => {
     );
   } catch (err) {
     res.status(500).json({ message: `Internal error: ${err.message}` });
+  }
+};
+//retrieving the document object from MongoDB
+const handleGetDocument = async (req, res) => {
+  try {
+    const document = await Document.findOne({
+      _id: ObjectId(req.params.documentId),
+    });
+
+    //no courses found
+    if (!document) {
+      return res.status(400).json({
+        message: `No document found.`,
+      });
+    }
+    res.status(200).json(courses);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: `Document retrieval error: ${err.message}` });
   }
 };
 
@@ -146,4 +166,5 @@ module.exports = {
   handleUploadDocument,
   handleGetFile,
   addLike,
+  handleGetDocument,
 };

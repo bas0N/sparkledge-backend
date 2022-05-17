@@ -27,6 +27,8 @@
     - /`POST` path: /infrastructure/programme/
   - [Get courses](https://github.com/bas0N/sparkledge-backend#get-courses)
     - /`POST` path: /infrastructure/course/
+  - [Get documents](https://github.com/bas0N/sparkledge-backend#get-documents)
+    - /`POST` path: /infrastructure/document/
   - [Add university](https://github.com/bas0N/sparkledge-backend#add-university)
     - /`POST` path: /infrastructure/university/new
   - [Add faculty](https://github.com/bas0N/sparkledge-backend#add-faculty)
@@ -761,7 +763,7 @@ Retrieves a list of courses with nested list of documents once provided a course
 - **Body Params**
 
 -Required:
-Programmeid in this case is a mongodb object retrieved from calling endpoint infrastructure/programme.
+CourseId in this case is a mongodb object id retrieved from calling endpoint infrastructure/programme.
 
 `courseId:[string]`
 
@@ -779,6 +781,48 @@ Programmeid in this case is a mongodb object retrieved from calling endpoint inf
 
   - **Code:** 500 Internal server error <br />
     **Content:** `{ message: "Courses retrieval error: ${err.message}" }`
+
+### Get documents
+
+Retrieves a document once provided a particular documentId.
+
+- **URL**
+
+  /infrastructure/document
+
+- **Method:**
+
+  `POST`
+
+- **Role required:**
+
+  `None`
+
+- **URL Params**
+-
+- `None`
+
+- **Body Params**
+
+-Required:
+DocumentId in this case is a mongodb objectid retrieved from calling endpoint infrastructure/course.
+
+`documentId:[string]`
+
+- **Success Response:**
+
+  - **Code:** 200 Succes <br />
+    **Content:** `{ document }`
+
+- **Error Response:**
+
+  - **Code:** 404 not found <br />
+    **Content:** `{ message: "No document found." }`
+
+    OR
+
+  - **Code:** 500 Internal server error <br />
+    **Content:** `{ message: "Document retrieval error: ${err.message}" }`
 
 ### Add University
 

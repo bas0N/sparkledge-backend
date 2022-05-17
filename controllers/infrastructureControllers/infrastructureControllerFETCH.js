@@ -86,23 +86,23 @@ const getCourse = async (req, res) => {
       .json({ message: `Courses retrieval error: ${err.message}` });
   }
 };
-const getDocuments = async (req, res) => {
+const getDocument = async (req, res) => {
   try {
     const document = await Document.findOne({
       _id: ObjectId(req.body.documentId),
-    }).populate("documents");
+    });
 
     //no courses found
-    if (!courses) {
+    if (!document) {
       return res.status(400).json({
         message: `No courses found.`,
       });
     }
-    res.status(200).json(courses);
+    res.status(200).json(document);
   } catch (err) {
     res
       .status(500)
-      .json({ message: `Courses retrieval error: ${err.message}` });
+      .json({ message: `Document retrieval error: ${err.message}` });
   }
 };
 
@@ -111,4 +111,5 @@ module.exports = {
   getFaculty,
   getProgramme,
   getCourse,
+  getDocument,
 };

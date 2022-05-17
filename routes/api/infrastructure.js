@@ -11,6 +11,7 @@ router.post("/university", infrastructureControllerFETCH.getUniversities);
 router.post("/faculty", infrastructureControllerFETCH.getFaculty);
 router.post("/programme", infrastructureControllerFETCH.getProgramme);
 router.post("/course", infrastructureControllerFETCH.getCourse);
+router.post("/document", infrastructureControllerFETCH.getDocument);
 
 //!! TO BE CHECKED FOR SECURITY!!
 //enpoints for creating infrastructure elements (login and role needed )
