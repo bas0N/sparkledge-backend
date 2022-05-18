@@ -4,6 +4,7 @@ const Course = require("../../model/Course");
 const University = require("../../model/University");
 const Faculty = require("../../model/Faculty");
 const Programme = require("../../model/Programme");
+const User = require("../../model/User");
 
 //retrieving a list of universities with nested faculties from the db
 const getUniversities = async (req, res) => {
@@ -98,6 +99,13 @@ const getDocument = async (req, res) => {
         message: `No courses found.`,
       });
     }
+    /*TO BE IMPLEMENTED
+    //adding the document to the last viewed list in the user object
+    await User.updateOne(
+      { _id: ObjectId(req.id) },
+      { $push: { viewed: documentId } }
+    );
+    */
     res.status(200).json(document);
   } catch (err) {
     res

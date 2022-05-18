@@ -7,6 +7,17 @@ const unlinkFile = util.promisify(fs.unlink);
 //uploading file straight to the s3 server
 const handleUpload = async (req, res) => {
   const file = req.file;
+  //checking file size
+  /*
+  fs.stat(file, (err, stats) => {
+    if (err) {
+      console.error(err);
+    }
+    console.log(stats);
+    // we have access to the file stats in `stats`
+  });
+  */
+
   const description = req.body.description;
   console.log(file);
   console.log(description);

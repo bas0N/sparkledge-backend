@@ -33,6 +33,7 @@ const userSchema = new Schema({
     default: false,
   },
   refreshToken: String,
+  //viewed: [{ type: String }]
 });
 
 module.exports = mongoose.model("User", userSchema);

@@ -11,7 +11,7 @@ const documentSchema = new Schema({
   fileKey: { type: String },
   viewsNum: { type: Number, default: 0 },
   //likes array
-  likes: [{ type: String, default: 0 }],
+  likes: [{ type: String }],
   likesNum: { type: Number, default: 0 },
 });
 

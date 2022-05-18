@@ -9,6 +9,7 @@ const Course = require("../model/Course");
 const University = require("../model/University");
 const Faculty = require("../model/Faculty");
 const Programme = require("../model/Programme");
+const User = require("../model/User");
 
 //upload the document to a given course
 const handleUploadDocument = async (req, res) => {
@@ -107,7 +108,10 @@ const handleGetFile = async (req, res) => {
     res.status(500).json({ message: `Internal error: ${err.message}` });
   }
 };
+
+//at this point, this functionality is included in the /infrastructure endpoint
 //retrieving the document object from MongoDB
+/*
 const handleGetDocument = async (req, res) => {
   try {
     const document = await Document.findOne({
@@ -127,6 +131,7 @@ const handleGetDocument = async (req, res) => {
       .json({ message: `Document retrieval error: ${err.message}` });
   }
 };
+*/
 
 //no longer valid (structure of the document object has changed)
 /*
@@ -166,5 +171,4 @@ module.exports = {
   handleUploadDocument,
   handleGetFile,
   addLike,
-  handleGetDocument,
 };
