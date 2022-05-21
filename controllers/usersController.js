@@ -84,17 +84,30 @@ const getUser = async (req, res) => {
   }
   const user = await User.findOne({ _id: req.params.id }).exec();
   if (!user) {
-    return res
-      .status(400)
-      .json({ message: `No user matches Id of: ${req.params.id}` });
+    return res.status(400).json({
+      message: `No user matches Id of: ${req.params.id}.`,
+    });
   }
   res.status(200).json(user);
 };
-
+const getLastViews = async (req, res) => {
+  try {
+    const user = await User.findOne({ _id: req.id }).exec();
+    if (!user.viewed) {
+      return res.status(400).json({
+        message: `No user matches Id of: ${req.id} or views array is empty.`,
+      });
+    }
+    res.status(200).json(user.viewed);
+  } catch (err) {
+    res.status(500).json({ message: `Data retrieval error: ${err.message}` });
+  }
+};
 module.exports = {
   getAllUsers,
   updateUser,
   deleteUser,
   getUser,
   createNewUser,
+  getLastViews,
 };

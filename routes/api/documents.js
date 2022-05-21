@@ -7,6 +7,7 @@ const ROLES_LIST = require("../../config/roles_list");
 const verifyRoles = require("../../middleware/verifyRoles");
 
 router.route("/").post(documentsController.handleUploadDocument);
+router.route("/").get(documentsController.handleGetDocument);
 
 router.route("/:key").get(documentsController.handleGetFile);
 

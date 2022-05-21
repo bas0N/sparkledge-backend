@@ -1,4 +1,5 @@
-var ObjectId = require("mongodb").ObjectID;
+var ObjectId = require("mongodb").ObjectId;
+
 const Document = require("../../model/Document");
 const Course = require("../../model/Course");
 const University = require("../../model/University");
@@ -99,13 +100,12 @@ const getDocument = async (req, res) => {
         message: `No courses found.`,
       });
     }
-    /*TO BE IMPLEMENTED
+    //TO BE IMPLEMENTED
     //adding the document to the last viewed list in the user object
     await User.updateOne(
       { _id: ObjectId(req.id) },
-      { $push: { viewed: documentId } }
+      { $push: { viewed: req.body.documentId } }
     );
-    */
     res.status(200).json(document);
   } catch (err) {
     res

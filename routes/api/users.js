@@ -4,6 +4,8 @@ const userController = require("../../controllers/usersController");
 const ROLES_LIST = require("../../config/roles_list");
 const verifyRoles = require("../../middleware/verifyRoles");
 
+router.route("/lastViews").get(userController.getLastViews);
+
 router
   .route("/")
   .get(verifyRoles(ROLES_LIST.Admin), userController.getAllUsers)

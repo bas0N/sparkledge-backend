@@ -111,11 +111,11 @@ const handleGetFile = async (req, res) => {
 
 //at this point, this functionality is included in the /infrastructure endpoint
 //retrieving the document object from MongoDB
-/*
+
 const handleGetDocument = async (req, res) => {
   try {
     const document = await Document.findOne({
-      _id: ObjectId(req.params.documentId),
+      _id: ObjectId(req.body.documentId),
     });
 
     //no courses found
@@ -124,14 +124,17 @@ const handleGetDocument = async (req, res) => {
         message: `No document found.`,
       });
     }
-    res.status(200).json(courses);
+    await User.updateOne(
+      { _id: ObjectId(req.id) },
+      { $addToSet: { viewed: req.body.documentId } }
+    );
+    res.status(200).json(document);
   } catch (err) {
     res
       .status(500)
       .json({ message: `Document retrieval error: ${err.message}` });
   }
 };
-*/
 
 //no longer valid (structure of the document object has changed)
 /*
@@ -171,4 +174,5 @@ module.exports = {
   handleUploadDocument,
   handleGetFile,
   addLike,
+  handleGetDocument,
 };
