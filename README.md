@@ -61,10 +61,14 @@
     - /`DELETE` path: /user/
   - [Update user object](https://github.com/bas0N/sparkledge-backend#update-user)
     - /`PUT` path: /user/
+  - [Get last views](https://github.com/bas0N/sparkledge-backend#get-last-views)
+    - /`GET` path: /lastViews/
 - /[documents](https://github.com/bas0N/sparkledge-backend#documents)
-  - [Add a document](https://github.com/bas0N/sparkledge-backend#add-document)
+  - [Add document](https://github.com/bas0N/sparkledge-backend#add-document)
     - /`POST` path: /document/
-  - [Get a document](https://github.com/bas0N/sparkledge-backend#get-document)
+  - [Get document](https://github.com/bas0N/sparkledge-backend#get-document)
+    - /`GET` path: /getDocument/:documentId
+  - [Get file](https://github.com/bas0N/sparkledge-backend#get-file)
     - /`GET` path: /document/:key
   - [Add like](https://github.com/bas0N/sparkledge-backend#add-like)
     - /`GET` path: /document/likes
@@ -486,6 +490,47 @@ Retreives a signle user fromm the DB on the basis of ID.
 
 - **Sample Call:**
 
+### Get last views
+
+Retrieves a list of recently viewed documents for the logged user.
+
+- **URL**
+
+  /users/lastViews/
+
+- **Method:**
+
+  `GET`
+
+- **Role required:**
+
+  `None`
+
+- **URL Params**
+
+  `None`
+
+- **Body Params**
+
+  `None`
+
+- **Success Response:**
+
+  - **Code:** 200 <br />
+    **Content:** A list of document id's recentry viewed by the user
+
+- **Error Response:**
+
+  - **Code:** 500 INTERNAL ERROR <br />
+    **Content:** `{ message: `Data retrieval error: ${err.message}` }`
+
+  OR
+
+  - **Code:** 400 Bad request <br />
+    **Content:** `{ message: `No user matches Id of: ${req.id} or views array is empty.` }`
+
+- **Sample Call:**
+
 ## Documents
 
 ### Add document.
@@ -533,7 +578,38 @@ None
 
 - **Sample Call:**
 
-### Get document.
+### Get Document.
+
+Allows to get a full document from the database (without file).
+
+- **URL**
+
+  /getDocument/:documentId
+
+- **Method:**
+
+  `GET`
+
+- **Role required:**
+
+  `User`
+
+- **URL Params**
+
+  - `:documentId` Id od the document that is to be retrieved from the database.
+
+- **Body Params**
+
+  -None
+
+- **Success Response:**
+
+  - **Code:** 20- Success. <br />
+    **Content:** `Document object.`
+
+- **Sample Call:**
+
+### Get File.
 
 Allows to retrieve a pdf file from the database and updates the viewcount.
 
@@ -559,7 +635,7 @@ Allows to retrieve a pdf file from the database and updates the viewcount.
 
 - **Success Response:**
 
-  - **Code:** 20 Success. <br />
+  - **Code:** 200 Success. <br />
     **Content:** `PDF file`
 
 - **Sample Call:**

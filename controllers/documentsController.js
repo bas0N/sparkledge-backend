@@ -115,7 +115,7 @@ const handleGetFile = async (req, res) => {
 const handleGetDocument = async (req, res) => {
   try {
     const document = await Document.findOne({
-      _id: ObjectId(req.body.documentId),
+      _id: ObjectId(req.params.documentId),
     });
 
     //no courses found
@@ -126,7 +126,7 @@ const handleGetDocument = async (req, res) => {
     }
     await User.updateOne(
       { _id: ObjectId(req.id) },
-      { $addToSet: { viewed: req.body.documentId } }
+      { $addToSet: { viewed: req.params.documentId } }
     );
     res.status(200).json(document);
   } catch (err) {
