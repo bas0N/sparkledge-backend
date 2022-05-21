@@ -584,7 +584,7 @@ Allows to get a full document from the database (without file).
 
 - **URL**
 
-  /getDocument/:documentId
+  /documents/getDocument/:documentId
 
 - **Method:**
 
