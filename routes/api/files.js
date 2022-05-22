@@ -10,7 +10,7 @@ router
   .route("/documents")
   .post(
     verifyRoles(ROLES_LIST.User),
-    upload.single("document"),
+    upload.array("file"),
     filesController.handleUpload
   );
 

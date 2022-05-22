@@ -6,7 +6,10 @@ const documentsController = require("../../controllers/documentsController");
 const ROLES_LIST = require("../../config/roles_list");
 const verifyRoles = require("../../middleware/verifyRoles");
 
-router.route("/").post(documentsController.handleUploadDocument);
+router
+  .route("/")
+  .post(upload.array("file"), documentsController.handleUploadDocument);
+
 router
   .route("/getDocument/:documentId")
   .get(documentsController.handleGetDocument);

@@ -559,7 +559,7 @@ None
   `title:[string]`
   `description:[string]`
   `courseId:[string]`
-  `document:[file]`
+  `file:[file]`
 
 - **Success Response:**
 

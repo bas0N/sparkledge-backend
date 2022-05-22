@@ -14,17 +14,18 @@ const User = require("../model/User");
 //upload the document to a given course
 const handleUploadDocument = async (req, res) => {
   //check if the file was attached
-  if (!req.file) {
+  //console.log(req.files);
+  if (!req.files) {
     return res.status(400).json({ message: "No file attached." });
   }
   //check if title and description are included
-  if (!req.body.title || !req.body.description) {
+  if (!req.body.title || !req.body.description || !req.body.courseId) {
     return res
       .status(400)
-      .json({ message: "Title and description must be included." });
+      .json({ message: "Title, description and courseId must be included." });
   }
   try {
-    const file = req.file;
+    const file = req.files[0];
     const resultS3 = await uploadFile(file);
     //deleting the file from the server once uploaded to s3
     await unlinkFile(file.path);
