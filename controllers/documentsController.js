@@ -15,14 +15,22 @@ const User = require("../model/User");
 const handleUploadDocument = async (req, res) => {
   //check if the file was attached
   //console.log(req.files);
-  if (!req.files) {
+  if (!req.files[0]) {
     return res.status(400).json({ message: "No file attached." });
   }
+  console.log(req.files[0].size);
   //check if title and description are included
   if (!req.body.title || !req.body.description || !req.body.courseId) {
     return res
       .status(400)
       .json({ message: "Title, description and courseId must be included." });
+  }
+  //check if the size of the file is approporiate (in Mb; smaller than 50 Mb)
+  const fileSizeInMegabytes = req.files[0].size / (1024 * 1024);
+  if (fileSizeInMegabytes > 50) {
+    return res
+      .status(400)
+      .json({ message: "File size is too big. It should not exceed 50Mb." });
   }
   try {
     const file = req.files[0];

@@ -573,6 +573,11 @@ None
 
     OR
 
+  - **Code:** 400 Bad request <br />
+    **Content:** `{ message: "File size is too big. It should not exceed 50Mb." }`
+
+    OR
+
   - **Code:** 500 Server error. <br />
     **Content:** `{ message: `Database error: ${err.message}` }`
 
