@@ -535,7 +535,7 @@ Retrieves a list of recently viewed documents for the logged user.
 
 ### Add document.
 
-Allows to post a document to the database.
+Allows to post a document to the database and returns the id of newly created document.
 
 - **URL**
 
@@ -564,7 +564,7 @@ None
 - **Success Response:**
 
   - **Code:** 201 Created. <br />
-    **Content:** `success: `New document added.`
+    **Content:** `{success: `New document added.`, id:document._id ()}`
 
 - **Error Response:**
 

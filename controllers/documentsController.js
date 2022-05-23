@@ -45,12 +45,16 @@ const handleUploadDocument = async (req, res) => {
       creatorEmail: req.email,
       fileKey: resultS3.Key,
     });
+    console.log(document);
     //pushing document object to the list in course object
     await Course.updateOne(
       { _id: ObjectId(req.body.courseId) },
       { $push: { documents: document } }
     );
-    res.status(201).json({ success: `New document added.` });
+    res.status(201).json({
+      success: `New document added.`,
+      id: document._id,
+    });
   } catch (err) {
     res.status(500).json({ message: `Database error: ${err.message}` });
   }
