@@ -33,7 +33,12 @@ const userSchema = new Schema({
     default: false,
   },
   refreshToken: String,
-  viewed: [{ type: String }],
+  viewed: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Document",
+    },
+  ],
 });
 
 module.exports = mongoose.model("User", userSchema);

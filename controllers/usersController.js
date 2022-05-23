@@ -92,7 +92,7 @@ const getUser = async (req, res) => {
 };
 const getLastViews = async (req, res) => {
   try {
-    const user = await User.findOne({ _id: req.id }).exec();
+    const user = await User.findOne({ _id: req.id }).populate("viewed");
     if (!user.viewed) {
       return res.status(400).json({
         message: `No user matches Id of: ${req.id} or views array is empty.`,
